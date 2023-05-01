@@ -44,7 +44,7 @@ Create table tbl_tpinmu(
 );
 
 Create table tbl_estado(
-	est_id int not null identity (1,1),
+	est_id int not null,
 	est_nombre varchar(100) not null,
 	constraint pk_tbl_estado Primary key(est_id)
 );
