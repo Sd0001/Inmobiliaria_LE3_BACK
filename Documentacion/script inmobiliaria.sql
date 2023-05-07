@@ -68,7 +68,7 @@ Create table tbl_oferta(
 );
 Create table tbl_transa(
 	tra_id int not null identity (1,1),
-	inm_id int not null, --fk
+	ofe_id int not null, --fk
 	tpt_id int not null, --fk
 	per_id int not null, --fk
 	est_id int not null, --fk
@@ -107,7 +107,7 @@ alter table tbl_inmueb add constraint fk_inm_per foreign key (per_id) references
 
 alter table tbl_oferta add constraint fk_ofe_inm foreign key (inm_id) references tbl_inmueb (inm_id);
 
-alter table tbl_transa add constraint fk_tra_inm foreign key (inm_id) references tbl_inmueb (inm_id);
+alter table tbl_transa add constraint fk_tra_ofe foreign key (ofe_id) references tbl_oferta (ofe_id);
 alter table tbl_transa add constraint fk_tra_tpt foreign key (tpt_id) references tbl_tptran (tpt_id);
 alter table tbl_transa add constraint fk_tra_per foreign key (per_id) references tbl_person (per_id);
 
