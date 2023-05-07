@@ -21,7 +21,7 @@ Create table tbl_inmueb(
 );
 
 Create table tbl_sucurs(
-	suc_id int not null identity (1,1),
+	suc_id int not null,
 	est_id int not null, --fk
 
 	suc_nombre varchar(100) not null,
@@ -38,7 +38,7 @@ Create table tbl_imagen(
 );
 
 Create table tbl_tpinmu(
-	tpi_id int not null identity (1,1),
+	tpi_id int not null,
 	tpi_nombre varchar(100) not null,
 	constraint pk_tbl_tpinmu Primary key(tpi_id)
 );
@@ -49,7 +49,7 @@ Create table tbl_estado(
 	constraint pk_tbl_estado Primary key(est_id)
 );
 Create table tbl_tptran(
-	tpt_id int not null identity (1,1),
+	tpt_id int not null,
 	tpt_nombre varchar(100) not null,
 	constraint pk_tbl_tptran Primary key(tpt_id)
 );
@@ -73,8 +73,8 @@ Create table tbl_transa(
 	per_id int not null, --fk
 	est_id int not null, --fk
 
-	tra_fecha date null,
-	tra_monto money null,
+	tra_fecha date not null,
+	tra_monto money not null,
 	constraint pk_tbl_transa Primary key(tra_id)
 );
 Create table tbl_person(
@@ -97,6 +97,7 @@ Create table tbl_visita(
 	
 	vis_fecha datetime not null,
 	vis_realiz bit not null,
+	vis_coment varchar(500) null,
 	constraint pk_tbl_visita Primary key(vis_id)
 );
 go
