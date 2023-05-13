@@ -7,23 +7,23 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ServicioInmueblesController : ControllerBase, IServicio<Inmueble>
+    public class ServicioTipoTransaccionesController : ControllerBase, IServicio<TipoTransaccion>
     {
-        private readonly IDatos<Inmueble> _datosInmueble;
-        private readonly ILogger<ServicioInmueblesController> _logger;
-        public ServicioInmueblesController(ILogger<ServicioInmueblesController> logger,
-            IDatos<Inmueble> datosInmueble)
+        private readonly IDatos<TipoTransaccion> _datosTipoTransaccion;
+        private readonly ILogger<ServicioTipoTransaccionesController> _logger;
+        public ServicioTipoTransaccionesController(ILogger<ServicioTipoTransaccionesController> logger,
+            IDatos<TipoTransaccion> datosTipoTransaccion)
         {
             _logger = logger;
-            _datosInmueble = datosInmueble;
+            _datosTipoTransaccion = datosTipoTransaccion;
         }
 
         [HttpPut]
-        public Respuesta<Inmueble> Actualizar(Inmueble model)
+        public Respuesta<TipoTransaccion> Actualizar(TipoTransaccion model)
         {
             try
             {
-                var respuesta = _datosInmueble.Actualizar(model);//TODO consumir datos
+                var respuesta = _datosTipoTransaccion.Actualizar(model);//TODO consumir datos
                 if (respuesta.Completa)
                     this.Response.StatusCode = (int)HttpStatusCode.OK;
                 else
@@ -34,16 +34,16 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex.Message);
                 this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
+                return new Respuesta<TipoTransaccion> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
 
         [HttpDelete]
-        public Respuesta<Inmueble> Eliminar(int id)
+        public Respuesta<TipoTransaccion> Eliminar(int id)
         {
             try
             {
-                var respuesta = _datosInmueble.Eliminar(id);//TODO consumir datos
+                var respuesta = _datosTipoTransaccion.Eliminar(id);//TODO consumir datos
                 if (respuesta.Completa)
                     this.Response.StatusCode = (int)HttpStatusCode.OK;
                 else
@@ -54,16 +54,16 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex.Message);
                 this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
+                return new Respuesta<TipoTransaccion> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
 
         [HttpPost]
-        public Respuesta<Inmueble> Insertar(Inmueble model)
+        public Respuesta<TipoTransaccion> Insertar(TipoTransaccion model)
         {
             try
             {
-                var respuesta = _datosInmueble.Insertar(model);//TODO consumir datos              
+                var respuesta = _datosTipoTransaccion.Insertar(model);//TODO consumir datos              
                 if (respuesta.Completa)
                     this.Response.StatusCode = (int)HttpStatusCode.OK;
                 else
@@ -74,25 +74,25 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex.Message);
                 this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
+                return new Respuesta<TipoTransaccion> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
 
         [HttpGet]
-        public Respuesta<IEnumerable<Inmueble>> Listar()
+        public Respuesta<IEnumerable<TipoTransaccion>> Listar()
         {
             try
             {
-                var model = _datosInmueble.Obtener();//TODO consumir datos
+                var model = _datosTipoTransaccion.Obtener();//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
-                return new Respuesta<IEnumerable<Inmueble>> { Completa = true, Mensaje = "", Datos = model };
+                return new Respuesta<IEnumerable<TipoTransaccion>> { Completa = true, Mensaje = "", Datos = model };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return new Respuesta<IEnumerable<Inmueble>> { Completa = false, Mensaje = ex.Message, Datos = null };
+                return new Respuesta<IEnumerable<TipoTransaccion>> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
     }

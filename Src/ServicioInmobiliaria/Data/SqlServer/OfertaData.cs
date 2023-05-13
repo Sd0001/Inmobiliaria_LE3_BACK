@@ -1,33 +1,59 @@
 ﻿using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Inmobilliaria.Data;
+using System.Linq.Expressions;
 
 namespace Inmobiliaria.Data.SqlServer
 {
     public class OfertaData : IDatos<Oferta>
     {
-        public Respuesta<int> actuallizar(Oferta entidad)
+        private readonly InmobiliariaContext _context;
+
+        public OfertaData(InmobiliariaContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public Respuesta<Oferta> Actualizar(Oferta entidad)
+        {
+            _context.Update(entidad);
+            _context.SaveChanges();
+            return new Respuesta<Oferta>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<int> Insertar(Oferta entidad)
+        public Respuesta<Oferta> Eliminar(int id)
         {
-            throw new NotImplementedException();
+            var entidad = _context.Oferta.Find(id);
+            if (entidad == null)
+                return new Respuesta<Oferta>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
+
+            _context.Remove(entidad);
+            _context.SaveChanges();
+            return new Respuesta<Oferta>() { Completa = true, Datos = entidad };
         }
 
-        public List<Oferta> Obtener(Func<Oferta, bool> filtro)
+        public Respuesta<Oferta> Insertar(Oferta entidad)
         {
-            throw new NotImplementedException();
+            _context.Add(entidad);
+            _context.SaveChanges();
+            return new Respuesta<Oferta>() { Completa = true, Datos = entidad };
         }
 
-        public Oferta Obtener(int id)
+        public List<Oferta> Obtener(Func<Oferta, bool>? filtro = null)
         {
-            throw new NotImplementedException();
+            IQueryable<Oferta> ofertas = _context.Oferta;
+            if (filtro != null)
+                ofertas=  ofertas.Where(FuncToExpression(filtro));
+            return ofertas.ToList();
+        }
+
+        public Oferta? Obtener(int id)
+        {
+            return _context?.Oferta?.FirstOrDefault(x=>x.Id == id);
+        }
+
+        private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
+        {
+            return x => f(x);
         }
     }
 }

@@ -11,51 +11,51 @@ using System.Threading.Tasks;
 
 namespace Inmobiliaria.Data.SqlServer
 {
-    public class InmuebleData : IDatos<Inmueble>
+    public class ImagenData : IDatos<Imagen>
     {
         private readonly InmobiliariaContext _context;
 
-        public InmuebleData(InmobiliariaContext context)
+        public ImagenData(InmobiliariaContext context)
         {
             _context = context;
         }
 
-        public Respuesta<Inmueble> Eliminar(int id)
+        public Respuesta<Imagen> Eliminar(int id)
         {
-            var entidad = _context.Inmueble.Find(id);
+            var entidad = _context.Imagen.Find(id);
             if (entidad == null)
-                return new Respuesta<Inmueble>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
+                return new Respuesta<Imagen>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
 
             _context.Remove(entidad);
             _context.SaveChanges();
-            return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
+            return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<Inmueble> Insertar(Inmueble entidad)
+        public Respuesta<Imagen> Insertar(Imagen entidad)
         {
             _context.Add(entidad);
             _context.SaveChanges();
-            return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
+            return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<Inmueble> Insertar(Inmueble entidad)
+        public Respuesta<Imagen> Insertar(Imagen entidad)
         {
             _context.Add(entidad);
             _context.SaveChanges();
-            return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
+            return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
         }
 
-        public List<Inmueble> Obtener(Func<Inmueble, bool>? filtro = null)
+        public List<Imagen> Obtener(Func<Imagen, bool>? filtro = null)
         {
-            IQueryable<Inmueble> ofertas = _context.Inmueble;
+            IQueryable<Imagen> ofertas = _context.Imagen;
             if (filtro != null)
                 ofertas=  ofertas.Where(FuncToExpression(filtro));
             return ofertas.ToList();
         }
 
-        public Inmueble? Obtener(int id)
+        public Imagen? Obtener(int id)
         {
-            return _context?.Inmueble?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Imagen?.FirstOrDefault(x=>x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)

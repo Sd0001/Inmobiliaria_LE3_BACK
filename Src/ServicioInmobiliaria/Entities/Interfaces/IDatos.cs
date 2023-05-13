@@ -2,7 +2,10 @@
 {
     public interface IDatos<T> : IDatosRead<T>
     {
-        Respuesta<int> Insertar(T entidad);
-        Respuesta<int> actuallizar(T entidad);
+        Respuesta<T> Actualizar(T entidad);
+
+        Respuesta<T> Eliminar(int id);
+
+        Respuesta<T> Insertar(T entidad);
     }
 }
