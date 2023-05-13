@@ -20,6 +20,13 @@ namespace Inmobiliaria.Data.SqlServer
             _context = context;
         }
 
+        public Respuesta<Inmueble> Actualizar(Inmueble entidad)
+        {
+            _context.Update(entidad);
+            _context.SaveChanges();
+            return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
+        }
+
         public Respuesta<Inmueble> Eliminar(int id)
         {
             var entidad = _context.Inmueble.Find(id);
@@ -30,20 +37,13 @@ namespace Inmobiliaria.Data.SqlServer
             _context.SaveChanges();
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
-
         public Respuesta<Inmueble> Insertar(Inmueble entidad)
         {
             _context.Add(entidad);
             _context.SaveChanges();
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
-
-        public Respuesta<Inmueble> Insertar(Inmueble entidad)
-        {
-            _context.Add(entidad);
-            _context.SaveChanges();
-            return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
-        }
+               
 
         public List<Inmueble> Obtener(Func<Inmueble, bool>? filtro = null)
         {

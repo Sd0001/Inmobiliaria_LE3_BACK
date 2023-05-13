@@ -7,8 +7,16 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<IDatos<Imagen>, ImagenData>();
+builder.Services.AddScoped<IDatos<Inmueble>, InmuebleData>();
+builder.Services.AddScoped<IDatos<Oferta>, OfertaData>();
+builder.Services.AddScoped<IDatos<Persona>, PersonaData>();
+builder.Services.AddScoped<IDatos<Sucursal>, SucursalData>();
+builder.Services.AddScoped<IDatos<TipoInmueble>, TipoInmuebleData>();
+builder.Services.AddScoped<IDatos<Transaccion>, TransaccionData>();
+builder.Services.AddScoped<IDatos<Visita>, VisitaData>();
 builder.Services.AddScoped<IDatosRead<Estado>, EstadoData>();
+builder.Services.AddScoped<IDatosRead<TipoTransaccion>, TipoTransaccionData>();
 
 builder.Services.AddControllers(); 
 builder.Services.AddSwaggerGen(options =>

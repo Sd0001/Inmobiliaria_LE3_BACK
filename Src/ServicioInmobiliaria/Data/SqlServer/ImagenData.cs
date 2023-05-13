@@ -20,6 +20,13 @@ namespace Inmobiliaria.Data.SqlServer
             _context = context;
         }
 
+        public Respuesta<Imagen> Actualizar(Imagen entidad)
+        {
+            _context.Update(entidad);
+            _context.SaveChanges();
+            return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
+        }
+
         public Respuesta<Imagen> Eliminar(int id)
         {
             var entidad = _context.Imagen.Find(id);
@@ -27,13 +34,6 @@ namespace Inmobiliaria.Data.SqlServer
                 return new Respuesta<Imagen>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
 
             _context.Remove(entidad);
-            _context.SaveChanges();
-            return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
-        }
-
-        public Respuesta<Imagen> Insertar(Imagen entidad)
-        {
-            _context.Add(entidad);
             _context.SaveChanges();
             return new Respuesta<Imagen>() { Completa = true, Datos = entidad };
         }

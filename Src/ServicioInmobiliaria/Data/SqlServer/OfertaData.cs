@@ -13,6 +13,7 @@ namespace Inmobiliaria.Data.SqlServer
         {
             _context = context;
         }
+
         public Respuesta<Oferta> Actualizar(Oferta entidad)
         {
             _context.Update(entidad);
