@@ -18,7 +18,17 @@ namespace Api.Controllers
             _datosEstado = datosEstado;
         }
 
+        /// <summary>
+        /// Método para obtener la lista de estados de la aplicación
+        /// </summary>
+        /// <remarks>
+        /// Método para obtener la lista de estados de la aplicación <br/>
+        /// 1 => 'Activo' <br/>
+        /// 2 => 'Eliminado'
+        /// </remarks>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<IEnumerable<Estado>> Listar()
         {
             try
