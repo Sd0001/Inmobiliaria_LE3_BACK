@@ -1,6 +1,7 @@
 ﻿using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
 using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Inmobiliaria.Data.SqlServer
@@ -9,9 +10,11 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public OfertaData(InmobiliariaContext context)
+        public OfertaData(DbConfig conn)
         {
-            _context = context;
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseSqlServer(conn.ConnectionString);
+            _context = new InmobiliariaContext(optionsBuilder.Options);
         }
 
         public Respuesta<Oferta> Actualizar(Oferta entidad)

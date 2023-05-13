@@ -15,9 +15,11 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public PersonaData(InmobiliariaContext context)
+        public PersonaData(DbConfig conn)
         {
-            _context = context;
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseSqlServer(conn.ConnectionString);
+            _context = new InmobiliariaContext(optionsBuilder.Options);
         }
 
         public Respuesta<Persona> Actualizar(Persona entidad)

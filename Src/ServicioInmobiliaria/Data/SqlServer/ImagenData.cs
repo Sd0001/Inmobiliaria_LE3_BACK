@@ -15,9 +15,11 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public ImagenData(InmobiliariaContext context)
+        public ImagenData(DbConfig conn)
         {
-            _context = context;
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseSqlServer(conn.ConnectionString);
+            _context = new InmobiliariaContext(optionsBuilder.Options);
         }
 
         public Respuesta<Imagen> Actualizar(Imagen entidad)
@@ -49,13 +51,13 @@ namespace Inmobiliaria.Data.SqlServer
         {
             IQueryable<Imagen> ofertas = _context.Imagen;
             if (filtro != null)
-                ofertas=  ofertas.Where(FuncToExpression(filtro));
+                ofertas = ofertas.Where(FuncToExpression(filtro));
             return ofertas.ToList();
         }
 
         public Imagen? Obtener(int id)
         {
-            return _context?.Imagen?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Imagen?.FirstOrDefault(x => x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)

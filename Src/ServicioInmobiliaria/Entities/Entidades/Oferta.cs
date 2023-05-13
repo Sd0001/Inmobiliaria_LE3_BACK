@@ -38,7 +38,7 @@ namespace Inmobiliaria.Entities
         public Estado Estado { get; set; }
         public Inmueble Inmueble { get; set; }
 
-        [InverseProperty("ofe_id")]
+        [InverseProperty("Oferta")]
         public IEnumerable<Transaccion> Transacciones { get; set; }
         [NotMapped]
         public bool EstaVendida { get { return Transacciones.Any(); } }

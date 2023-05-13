@@ -11,11 +11,9 @@ namespace Inmobiliaria.Entities
         public int Id { get; set; }
 
         [Column("ofe_id")]
-        [ForeignKey("Oferta")]
         public int IdOferta { get; set; }
 
         [Column("img_ruta")]
         public string Ruta { get; set; }      
-        public Oferta Oferta { get; set; }
     }
 }

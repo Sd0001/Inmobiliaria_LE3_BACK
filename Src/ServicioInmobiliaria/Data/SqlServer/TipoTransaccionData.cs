@@ -14,7 +14,13 @@ namespace Inmobiliaria.Data.SqlServer
     public class TipoTransaccionData : IDatosRead<TipoTransaccion>
     {
         private readonly InmobiliariaContext _context;
-               
+
+        public TipoTransaccionData(DbConfig conn)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseSqlServer(conn.ConnectionString);
+            _context = new InmobiliariaContext(optionsBuilder.Options);
+        }
 
         public List<TipoTransaccion> Obtener(Func<TipoTransaccion, bool>? filtro = null)
         {

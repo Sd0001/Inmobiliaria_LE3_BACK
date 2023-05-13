@@ -9,10 +9,10 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class ServicioEstadosController : ControllerBase, IServicioRead<Estado>
     {
-        private readonly IDatos<Estado> _datosEstado;
+        private readonly IDatosRead<Estado> _datosEstado;
         private readonly ILogger<ServicioEstadosController> _logger;
         public ServicioEstadosController(ILogger<ServicioEstadosController> logger,
-            IDatos<Estado> datosEstado)
+            IDatosRead<Estado> datosEstado)
         {
             _logger = logger;
             _datosEstado = datosEstado;

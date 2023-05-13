@@ -39,6 +39,16 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+var connectionString = "";
+
+connectionString = builder.Configuration.GetConnectionString("Pruebas");
+
+
+var dbConfig = new DbConfig();
+dbConfig.ConnectionString = connectionString;
+builder.Services.AddSingleton<DbConfig>(dbConfig);
+
+builder.Services.AddOptions();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,10 +59,12 @@ app.UseAuthorization();
 
 app.MapControllers(); 
 app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty;
-});
+app.UseSwaggerUI(
+//    options =>
+//{
+//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//    options.RoutePrefix = string.Empty;
+//}
+);
 
 app.Run();

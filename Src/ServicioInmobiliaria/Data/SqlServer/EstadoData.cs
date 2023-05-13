@@ -15,9 +15,11 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public EstadoData(InmobiliariaContext context)
+        public EstadoData(DbConfig conn)
         {
-            _context = context;
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseSqlServer(conn.ConnectionString);
+            _context =  new InmobiliariaContext(optionsBuilder.Options);
         }
        
         public List<Estado> Obtener(Func<Estado, bool>? filtro = null)

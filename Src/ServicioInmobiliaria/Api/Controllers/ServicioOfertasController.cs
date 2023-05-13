@@ -96,6 +96,8 @@ namespace Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/[controller]/Activas")]
         public Respuesta<IEnumerable<Oferta>> ListarActivas()
         {
             try
