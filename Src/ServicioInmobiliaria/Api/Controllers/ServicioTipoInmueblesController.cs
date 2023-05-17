@@ -17,8 +17,21 @@ namespace Api.Controllers
             _logger = logger;
             _datosTipoInmueble = datosTipoInmueble;
         }
-
+        
+        
+        /// <summary>
+        /// Actualiza los datos de un tipo de inmueble en la aplicación.
+        /// </summary>
+        /// <param name="model">Objeto que contiene los datos actualizados del tipo de inmueble.</param>
+        /// <returns>Respuesta con los resultados de la actualización.</returns>
+        /// <response code="200">El tipo de inmueble se actualizó correctamente.</response>
+        /// <response code="304">No se realizaron cambios en el tipo de inmueble.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
+
         public Respuesta<TipoInmueble> Actualizar(TipoInmueble model)
         {
             try
@@ -38,7 +51,18 @@ namespace Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un tipo de inmueble de la aplicación.
+        /// </summary>
+        /// <param name="id">ID del tipo de inmueble a eliminar.</param>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">El tipo de inmueble se eliminó correctamente.</response>
+        /// <response code="404">El tipo de inmueble no se encontró.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<TipoInmueble> Eliminar(int id)
         {
             try
@@ -58,7 +82,18 @@ namespace Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Inserta un nuevo tipo de inmueble en la aplicación.
+        /// </summary>
+        /// <param name="model">Objeto que contiene los datos del tipo de inmueble a insertar.</param>
+        /// <returns>Respuesta con los resultados de la inserción.</returns>
+        /// <response code="200">El tipo de inmueble se insertó correctamente.</response>
+        /// <response code="304">No se realizaron cambios en el tipo de inmueble.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<TipoInmueble> Insertar(TipoInmueble model)
         {
             try
@@ -78,7 +113,15 @@ namespace Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene la lista de tipos de inmuebles de la aplicación.
+        /// </summary>
+        /// <returns>Respuesta con la lista de tipos de inmuebles.</returns>
+        /// <response code="200">La lista de tipos de inmuebles se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoInmueble>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoInmueble>>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<IEnumerable<TipoInmueble>> Listar()
         {
             try

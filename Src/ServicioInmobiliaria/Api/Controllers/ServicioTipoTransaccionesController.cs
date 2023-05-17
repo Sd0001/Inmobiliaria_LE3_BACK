@@ -16,9 +16,17 @@ namespace Api.Controllers
         {
             _logger = logger;
             _datosTipoTransaccion = datosTipoTransaccion;
-        }        
+        }
 
+        /// <summary>
+        /// Obtiene la lista de tipos de transacciones de la aplicación.
+        /// </summary>
+        /// <returns>Respuesta con la lista de tipos de transacciones.</returns>
+        /// <response code="200">La lista de tipos de transacciones se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoTransaccion>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoTransaccion>>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<IEnumerable<TipoTransaccion>> Listar()
         {
             try

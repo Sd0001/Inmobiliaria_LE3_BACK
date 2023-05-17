@@ -17,8 +17,18 @@ namespace Api.Controllers
             _logger = logger;
             _datosSucursal = datosSucursal;
         }
-
+        /// <summary>
+        /// Actualiza los datos de una sucursal en la aplicación.
+        /// </summary>
+        /// <param name="model">Objeto que contiene los datos actualizados de la sucursal.</param>
+        /// <returns>Respuesta con los resultados de la actualización.</returns>
+        /// <response code="200">La sucursal se actualizó correctamente.</response>
+        /// <response code="304">No se realizaron cambios en la sucursal.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<Sucursal> Actualizar(Sucursal model)
         {
             try
@@ -37,8 +47,19 @@ namespace Api.Controllers
                 return new Respuesta<Sucursal> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
-
+        /// <summary>
+        /// Elimina una sucursal de la aplicación.
+        /// </summary>
+        /// <param name="id">ID de la sucursal a eliminar.</param>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">La sucursal se eliminó correctamente.</response>
+        /// <response code="404">La sucursal no se encontró.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
+
         public Respuesta<Sucursal> Eliminar(int id)
         {
             try
@@ -57,8 +78,18 @@ namespace Api.Controllers
                 return new Respuesta<Sucursal> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
-
+        /// <summary>
+        /// Inserta una nueva sucursal en la aplicación.
+        /// </summary>
+        /// <param name="model">Objeto que contiene los datos de la sucursal a insertar.</param>
+        /// <returns>Respuesta con los resultados de la inserción.</returns>
+        /// <response code="200">La sucursal se insertó correctamente.</response>
+        /// <response code="304">No se realizaron cambios en la sucursal.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<Sucursal> Insertar(Sucursal model)
         {
             try
@@ -78,7 +109,16 @@ namespace Api.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Obtiene la lista de sucursales de la aplicación.
+        /// </summary>
+        /// <returns>Respuesta con la lista de sucursales.</returns>
+        /// <response code="200">La lista de sucursales se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<Sucursal>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<Sucursal>>), (int)HttpStatusCode.InternalServerError)]
         public Respuesta<IEnumerable<Sucursal>> Listar()
         {
             try
