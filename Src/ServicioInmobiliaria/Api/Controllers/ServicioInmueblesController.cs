@@ -17,8 +17,16 @@ namespace Api.Controllers
             _logger = logger;
             _datosInmueble = datosInmueble;
         }
-
+        /// <summary>
+        /// Método para actualizar un inmueble
+        /// </summary>
+        /// <remarks>
+        /// Con este método se actualiza un inmueble <br/>
+        /// </remarks>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Inmueble> Actualizar(Inmueble model)
         {
             try
@@ -37,8 +45,17 @@ namespace Api.Controllers
                 return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
-
+        /// <summary>
+        /// Método para eliminar un inmueble
+        /// </summary>
+        /// <remarks>
+        /// Con este método se elimina un inmueble <br/>
+        /// </remarks>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
+        
         public Respuesta<Inmueble> Eliminar(int id)
         {
             try
@@ -57,8 +74,17 @@ namespace Api.Controllers
                 return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+        /// <summary>
+        /// Método para crear un inmueble
+        /// </summary>
+        /// <remarks>
+        /// Con este método se crea un inmueble <br/>
+        /// </remarks>
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Inmueble> Insertar(Inmueble model)
         {
             try
@@ -77,8 +103,16 @@ namespace Api.Controllers
                 return new Respuesta<Inmueble> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+        /// <summary>
+        /// Método para consultar un inmueble
+        /// </summary>
+        /// <remarks>
+        /// Con este método se consulta un inmueble <br/>
+        /// </remarks>
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<IEnumerable<Inmueble>> Listar()
         {
             try

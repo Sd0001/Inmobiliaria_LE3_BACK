@@ -18,7 +18,18 @@ namespace Api.Controllers
             _datosImagen = datosImagen;
         }
 
+        /// <summary>
+        /// Método  para actualizar una imagen de una oferta
+        /// </summary>
+        /// <remarks>
+        /// Con este método  se actualiza la imagen que se tiene publicada para una oferta <br/>
+        /// 
+        /// </remarks>
+
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Imagen> Actualizar(Imagen model)
         {
             try
@@ -37,8 +48,16 @@ namespace Api.Controllers
                 return new Respuesta<Imagen> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
-
+        /// <summary>
+        /// Método para eliminar una imagen de una oferta
+        /// </summary>
+        /// <remarks>
+        /// Con este método se elimina la imagen que se tiene publicada para una oferta <br/>
+        /// </remarks>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Imagen> Eliminar(int id)
         {
             try
@@ -57,8 +76,16 @@ namespace Api.Controllers
                 return new Respuesta<Imagen> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
-
+        /// <summary>
+        /// Método para crear una imagen de una oferta
+        /// </summary>
+        /// <remarks>
+        /// Con este método se crea la imagen que se tiene publicada para una oferta <br/>
+        /// </remarks>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Imagen> Insertar(Imagen model)
         {
             try
@@ -77,8 +104,16 @@ namespace Api.Controllers
                 return new Respuesta<Imagen> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+        /// <summary>
+        /// Método para consultar una imagen de una oferta
+        /// </summary>
+        /// <remarks>
+        /// Con este método se consulta la imagen que se tiene publicada para una oferta <br/>
+        /// </remarks>
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<IEnumerable<Imagen>> Listar()
         {
             try
