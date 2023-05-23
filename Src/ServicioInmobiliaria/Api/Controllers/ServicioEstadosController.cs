@@ -25,6 +25,8 @@ namespace Api.Controllers
         /// Método  para obtener la lista de estados de la aplicación <br/>
         /// 1 => 'Activo' <br/>
         /// 2 => 'Eliminado'
+        /// <response code="200">El estado se elimin� correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// </remarks>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

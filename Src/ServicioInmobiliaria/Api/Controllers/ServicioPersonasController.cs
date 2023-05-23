@@ -20,6 +20,10 @@ namespace Api.Controllers
         /// <summary>
         /// Método para actualizar a una persona
         /// </summary>
+        /// <param name="model">Datos de la persona a actualizar.</param>
+        /// <response code="200">La persona se actualizó correctamente.</response>
+        /// <response code="304">la persona no se pudo actualizar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se actualiza nos datos de una persona <br/>
         /// </remarks>
@@ -48,6 +52,11 @@ namespace Api.Controllers
         /// <summary>
         /// Método para eliminar a una persona
         /// </summary>
+        /// <param name="id">ID del tipo de persona a eliminar.</param>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">La persona se elimin� correctamente.</response>
+        /// <response code="404">La persona no se encontr�.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina una persona <br/>
         /// </remarks>
@@ -77,6 +86,10 @@ namespace Api.Controllers
          /// <summary>
         /// Método para crear a una persona
         /// </summary>
+        /// <param name="model">Datos de la persona a insertar.</param>
+        /// <response code="200">La persona se inserto correctamente.</response>
+        /// <response code="304">la persona no se pudo insertar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se crea una persona<br/>
         /// </remarks>
@@ -106,6 +119,8 @@ namespace Api.Controllers
         /// <summary>
         /// Método para consultar una persona
         /// </summary>
+        /// <response code="200">La persona se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se consulta una persona <br/>
         /// </remarks>

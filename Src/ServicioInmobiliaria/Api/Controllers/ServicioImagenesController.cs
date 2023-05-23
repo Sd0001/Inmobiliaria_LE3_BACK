@@ -21,9 +21,12 @@ namespace Api.Controllers
         /// <summary>
         /// Método  para actualizar una imagen de una oferta
         /// </summary>
+        /// <param name="model">Datos de la imagen a actualizar.</param>
+        /// <response code="200">La imagen se actualizó correctamente.</response>
+        /// <response code="304">la imagen no se pudo actualizar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método  se actualiza la imagen que se tiene publicada para una oferta <br/>
-        /// 
         /// </remarks>
 
         [HttpPut]
@@ -51,6 +54,11 @@ namespace Api.Controllers
         /// <summary>
         /// Método para eliminar una imagen de una oferta
         /// </summary>
+        /// <param name="id">ID del tipo de imagen a eliminar.</param>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">La imagen se elimin� correctamente.</response>
+        /// <response code="404">La imagen no se encontr�.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina la imagen que se tiene publicada para una oferta <br/>
         /// </remarks>
@@ -79,6 +87,10 @@ namespace Api.Controllers
         /// <summary>
         /// Método para crear una imagen de una oferta
         /// </summary>
+        /// <param name="model">Datos de la imagen a insertar.</param>
+        /// <response code="200">La imagen se inserto correctamente.</response>
+        /// <response code="304">la imagen no se pudo insertar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se crea la imagen que se tiene publicada para una oferta <br/>
         /// </remarks>
@@ -107,6 +119,8 @@ namespace Api.Controllers
         /// <summary>
         /// Método para consultar una imagen de una oferta
         /// </summary>
+        /// <response code="200">La imagen se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se consulta la imagen que se tiene publicada para una oferta <br/>
         /// </remarks>

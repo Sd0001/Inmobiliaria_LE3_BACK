@@ -19,12 +19,12 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Actualiza los datos de una transacción en la aplicación.
+        /// Actualiza los datos de una transacciï¿½n en la aplicaciï¿½n.
         /// </summary>
-        /// <param name="model">Datos de la transacción a actualizar.</param>
-        /// <returns>Respuesta con el resultado de la actualización.</returns>
-        /// <response code="200">Los datos de la transacción se actualizaron correctamente.</response>
-        /// <response code="304">No se realizaron cambios en los datos de la transacción.</response>
+        /// <param name="model">Datos de la transacciï¿½n a actualizar.</param>
+        /// <returns>Respuesta con el resultado de la actualizaciï¿½n.</returns>
+        /// <response code="200">Los datos de la transacciï¿½n se actualizaron correctamente.</response>
+        /// <response code="304">No se realizaron cambios en los datos de la transacciï¿½n.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -50,12 +50,12 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Elimina una transacción de la aplicación.
+        /// Elimina una transacciï¿½n de la aplicaciï¿½n.
         /// </summary>
-        /// <param name="id">ID de la transacción a eliminar.</param>
-        /// <returns>Respuesta con el resultado de la eliminación.</returns>
-        /// <response code="200">La transacción se eliminó correctamente.</response>
-        /// <response code="404">La transacción con el ID especificado no fue encontrada.</response>
+        /// <param name="id">ID de la transacciï¿½n a eliminar.</param>
+        /// <returns>Respuesta con el resultado de la eliminaciï¿½n.</returns>
+        /// <response code="200">La transacciï¿½n se eliminï¿½ correctamente.</response>
+        /// <response code="404">La transacciï¿½n con el ID especificado no fue encontrada.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -81,12 +81,12 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Inserta una nueva transacción en la aplicación.
+        /// Inserta una nueva transacciï¿½n en la aplicaciï¿½n.
         /// </summary>
-        /// <param name="model">Datos de la transacción a insertar.</param>
-        /// <returns>Respuesta con el resultado de la inserción.</returns>
-        /// <response code="200">La transacción se insertó correctamente.</response>
-        /// <response code="304">La transacción no se pudo insertar debido a datos no modificados.</response>
+        /// <param name="model">Datos de la transacciï¿½n a insertar.</param>
+        /// <returns>Respuesta con el resultado de la inserciï¿½n.</returns>
+        /// <response code="200">La transacciï¿½n se insertï¿½ correctamente.</response>
+        /// <response code="304">La transacciï¿½n no se pudo insertar debido a datos no modificados.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -112,7 +112,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Obtiene la lista de transacciones de la aplicación.
+        /// Obtiene la lista de transacciones de la aplicaciï¿½n.
         /// </summary>
         /// <returns>Respuesta con la lista de transacciones.</returns>
         /// <response code="200">Lista de transacciones obtenida correctamente.</response>
@@ -124,7 +124,7 @@ namespace Api.Controllers
         {
             try
             {
-                var model = _datosTransaccion.Obtener();//TODO consumir datos
+                var model = _datosTransaccion.Obtener(x=>x.IdEstado==1);//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
                 return new Respuesta<IEnumerable<Transaccion>> { Completa = true, Mensaje = "", Datos = model };
