@@ -17,8 +17,20 @@ namespace Inmobiliaria.Api.Controllers
             _logger = logger;
             _datosPersona = datosPersona;
         }
-
+        /// <summary>
+        /// Método para actualizar a una persona
+        /// </summary>
+        /// <param name="model">Datos de la persona a actualizar.</param>
+        /// <response code="200">La persona se actualizó correctamente.</response>
+        /// <response code="304">la persona no se pudo actualizar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        /// <remarks>
+        /// Con este método se actualiza nos datos de una persona <br/>
+        /// </remarks>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Persona> Actualizar(Persona model)
         {
             try
@@ -37,8 +49,22 @@ namespace Inmobiliaria.Api.Controllers
                 return new Respuesta<Persona> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+        /// <summary>
+        /// Método para eliminar a una persona
+        /// </summary>
+        /// <param name="id">ID del tipo de persona a eliminar.</param>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">La persona se elimin� correctamente.</response>
+        /// <response code="404">La persona no se encontr�.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        /// <remarks>
+        /// Con este método se elimina una persona <br/>
+        /// </remarks>
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Persona> Eliminar(int id)
         {
             try
@@ -57,8 +83,21 @@ namespace Inmobiliaria.Api.Controllers
                 return new Respuesta<Persona> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+         /// <summary>
+        /// Método para crear a una persona
+        /// </summary>
+        /// <param name="model">Datos de la persona a insertar.</param>
+        /// <response code="200">La persona se inserto correctamente.</response>
+        /// <response code="304">la persona no se pudo insertar debido a datos no modificados.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        /// <remarks>
+        /// Con este método se crea una persona<br/>
+        /// </remarks>
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<Persona> Insertar(Persona model)
         {
             try
@@ -77,8 +116,18 @@ namespace Inmobiliaria.Api.Controllers
                 return new Respuesta<Persona> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+        /// <summary>
+        /// Método para consultar una persona
+        /// </summary>
+        /// <response code="200">La persona se obtuvo correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        /// <remarks>
+        /// Con este método se consulta una persona <br/>
+        /// </remarks>
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
         public Respuesta<IEnumerable<Persona>> Listar()
         {
             try

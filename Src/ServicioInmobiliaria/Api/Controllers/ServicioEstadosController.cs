@@ -19,12 +19,14 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Método para obtener la lista de estados de la aplicación
+        /// MÃ©todo  para obtener la lista de estados de la aplicaciÃ³n
         /// </summary>
         /// <remarks>
-        /// Método para obtener la lista de estados de la aplicación <br/>
+        /// MÃ©todo  para obtener la lista de estados de la aplicaciÃ³n <br/>
         /// 1 => 'Activo' <br/>
         /// 2 => 'Eliminado'
+        /// <response code="200">El estado se eliminï¿½ correctamente.</response>
+        /// <response code="500">Error interno del servidor.</response>
         /// </remarks>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

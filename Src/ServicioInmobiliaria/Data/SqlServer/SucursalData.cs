@@ -35,7 +35,9 @@ namespace Inmobiliaria.Data.SqlServer
             if (entidad == null)
                 return new Respuesta<Sucursal>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
 
-            _context.Remove(entidad);
+            //_context.Remove(entidad);
+             entidad.IdEstado=2;
+            _context.Update(entidad);
             _context.SaveChanges();
             return new Respuesta<Sucursal>() { Completa = true, Datos = entidad };
         }

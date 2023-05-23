@@ -19,10 +19,10 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Actualiza los datos de una visita en la aplicación.
+        /// Actualiza los datos de una visita en la aplicaciï¿½n.
         /// </summary>
         /// <param name="model">Datos de la visita a actualizar.</param>
-        /// <returns>Respuesta con el resultado de la operación.</returns>
+        /// <returns>Respuesta con el resultado de la operaciï¿½n.</returns>
         /// <response code="200">Los datos de la visita se actualizaron correctamente.</response>
         /// <response code="304">No se realizaron cambios en los datos de la visita.</response>
         /// <response code="500">Error interno del servidor.</response>
@@ -49,11 +49,11 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Elimina una visita de la aplicación.
+        /// Elimina una visita de la aplicaciï¿½n.
         /// </summary>
         /// <param name="id">ID de la visita a eliminar.</param>
-        /// <returns>Respuesta con el resultado de la operación.</returns>
-        /// <response code="200">La visita se eliminó correctamente.</response>
+        /// <returns>Respuesta con el resultado de la operaciï¿½n.</returns>
+        /// <response code="200">La visita se eliminï¿½ correctamente.</response>
         /// <response code="404">La visita no fue encontrada.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
@@ -80,12 +80,12 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Inserta una nueva visita en la aplicación.
+        /// Inserta una nueva visita en la aplicaciï¿½n.
         /// </summary>
         /// <param name="model">Datos de la visita a insertar.</param>
-        /// <returns>Respuesta con el resultado de la operación.</returns>
-        /// <response code="200">La visita se insertó correctamente.</response>
-        /// <response code="304">No se modificó ningún recurso existente.</response>
+        /// <returns>Respuesta con el resultado de la operaciï¿½n.</returns>
+        /// <response code="200">La visita se insertï¿½ correctamente.</response>
+        /// <response code="304">No se modificï¿½ ningï¿½n recurso existente.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.OK)]
@@ -111,10 +111,10 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Obtiene la lista de visitas de la aplicación.
+        /// Obtiene la lista de visitas de la aplicaciï¿½n.
         /// </summary>
         /// <returns>Respuesta con la lista de visitas.</returns>
-        /// <response code="200">La operación se completó correctamente.</response>
+        /// <response code="200">La operaciï¿½n se completï¿½ correctamente.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Visita>>), (int)HttpStatusCode.OK)]
@@ -133,7 +133,7 @@ namespace Inmobiliaria.Api.Controllers
                 _logger.LogError(ex.Message);
                 this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 return new Respuesta<IEnumerable<Visita>> { Completa = false, Mensaje = ex.Message, Datos = null };
-            }Isabella01GJ.
+            }
         }
     }
 }

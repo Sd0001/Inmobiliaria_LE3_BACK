@@ -25,14 +25,15 @@ INSERT INTO [dbo].[tbl_estado]
 		   (2,'Eliminado');
 GO
 INSERT INTO [dbo].[tbl_sucurs]
-           ([est_id]
+           ([suc_id]
+		   ,[est_id]
            ,[suc_nombre]
            ,[suc_direcc]
            ,[suc_telefo])
      VALUES
-           (1,'Manizales','calle 23 # 3-45','8873456'),
-		   (1,'Pereira','Av 5 # 3 - 56','8965743'),
-		   (1,'Armenia','Barrio el bosque','3112345456');
+           (1,1,'Manizales','calle 23 # 3-45','8873456'),
+		   (2,1,'Pereira','Av 5 # 3 - 56','8965743'),
+		   (3,1,'Armenia','Barrio el bosque','3112345456');
    
 GO
 
