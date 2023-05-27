@@ -161,7 +161,7 @@ namespace Inmobiliaria.Api.Controllers
         {
             try
             {
-                var model = _datosOferta.Obtener(x => !x.Transacciones.Any()&& x.IdEstado==1);//TODO consumir datos
+                var model = _datosOferta.Obtener(x => x.Transacciones.Any() != true && x.IdEstado==1);//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
                 return new Respuesta<IEnumerable<Oferta>> { Completa = true, Mensaje = "", Datos = model };

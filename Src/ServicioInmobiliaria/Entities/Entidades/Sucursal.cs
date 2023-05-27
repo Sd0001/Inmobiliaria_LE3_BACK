@@ -22,6 +22,6 @@ namespace Inmobiliaria.Entities
 
         [Column("suc_telefo")]
         public string Telefono { get; set; }
-        public Estado Estado { get; set; }
+        public Estado? Estado { get; set; }
     }
 }

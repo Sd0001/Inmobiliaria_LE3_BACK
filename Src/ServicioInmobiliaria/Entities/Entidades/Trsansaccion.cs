@@ -31,9 +31,9 @@ namespace Inmobiliaria.Entities
 
         [Column("tra_monto")]
         public decimal Monto { get; set; }
-        public Oferta Oferta { get; set; }
-        public Estado Estado { get; set; }
-        public TipoTransaccion TipoTransaccion { get; set; }
-        public Persona Persona { get; set; }
+        public Oferta? Oferta { get; set; }
+        public Estado? Estado { get; set; }
+        public TipoTransaccion? TipoTransaccion { get; set; }
+        public Persona? Persona { get; set; }
     }
 }
