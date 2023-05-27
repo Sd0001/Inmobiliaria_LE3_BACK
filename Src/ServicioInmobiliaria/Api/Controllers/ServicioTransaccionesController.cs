@@ -3,7 +3,7 @@ using Inmobiliaria.Entities.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Api.Controllers
+namespace Inmobiliaria.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
