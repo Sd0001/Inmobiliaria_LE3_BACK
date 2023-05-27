@@ -28,7 +28,7 @@ namespace Inmobiliaria.Api.Modules
                 var respueta = new Respuesta<bool?>
                 {
                     Completa = false,
-                    Mensaje = "Token Validation Has Failed. Request Access Denied",
+                    Mensaje = "Autenticación fallida, enviar el usuario y contraseña tipo basic por las cabeceras",
                     Datos = null
                 };
                 var resultUnautorized = new JsonResult(respueta)
