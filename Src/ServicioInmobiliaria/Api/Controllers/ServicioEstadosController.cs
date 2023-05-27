@@ -5,12 +5,19 @@ using System.Net;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// servicio de estados
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class ServicioEstadosController : ControllerBase, IServicioRead<Estado>
     {
         private readonly IDatosRead<Estado> _datosEstado;
         private readonly ILogger<ServicioEstadosController> _logger;
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public ServicioEstadosController(ILogger<ServicioEstadosController> logger,
             IDatosRead<Estado> datosEstado)
         {

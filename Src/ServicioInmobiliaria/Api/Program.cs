@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "Inmobiliaria API",
-        Description = "Taller para materia Linea de énfasis 3 universidad Remington", 
+        Description = "Taller para materia Linea de ï¿½nfasis 3 universidad Remington", 
         Contact = new OpenApiContact
         {
             Name = "Example Contact",
@@ -49,7 +49,7 @@ connectionString = builder.Configuration.GetConnectionString("Pruebas");
 
 
 var dbConfig = new DbConfig();
-dbConfig.ConnectionString = connectionString;
+dbConfig.ConnectionString = connectionString??"";
 builder.Services.AddSingleton<DbConfig>(dbConfig);
 
 builder.Services.AddOptions();
@@ -57,7 +57,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
