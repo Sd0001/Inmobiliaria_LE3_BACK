@@ -19,12 +19,12 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Actualiza los datos de una transacci�n en la aplicaci�n.
+        /// Actualiza los datos de una transacción en la aplicación.
         /// </summary>
-        /// <param name="model">Datos de la transacci�n a actualizar.</param>
-        /// <returns>Respuesta con el resultado de la actualizaci�n.</returns>
-        /// <response code="200">Los datos de la transacci�n se actualizaron correctamente.</response>
-        /// <response code="304">No se realizaron cambios en los datos de la transacci�n.</response>
+        /// <param name="model">Datos de la transacción a actualizar.</param>
+        /// <returns>Respuesta con el resultado de la actualización.</returns>
+        /// <response code="200">Los datos de la transacción se actualizaron correctamente.</response>
+        /// <response code="304">No se realizaron cambios en los datos de la transacción.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -50,12 +50,12 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Elimina una transacci�n de la aplicaci�n.
+        /// Elimina una transacción de la aplicación.
         /// </summary>
-        /// <param name="id">ID de la transacci�n a eliminar.</param>
-        /// <returns>Respuesta con el resultado de la eliminaci�n.</returns>
-        /// <response code="200">La transacci�n se elimin� correctamente.</response>
-        /// <response code="404">La transacci�n con el ID especificado no fue encontrada.</response>
+        /// <param name="id">ID de la transacción a eliminar.</param>
+        /// <returns>Respuesta con el resultado de la eliminación.</returns>
+        /// <response code="200">La transacción se eliminó correctamente.</response>
+        /// <response code="404">La transacción con el ID especificado no fue encontrada.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -81,12 +81,12 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Inserta una nueva transacci�n en la aplicaci�n.
+        /// Inserta una nueva transacción en la aplicación.
         /// </summary>
-        /// <param name="model">Datos de la transacci�n a insertar.</param>
-        /// <returns>Respuesta con el resultado de la inserci�n.</returns>
-        /// <response code="200">La transacci�n se insert� correctamente.</response>
-        /// <response code="304">La transacci�n no se pudo insertar debido a datos no modificados.</response>
+        /// <param name="model">Datos de la transacción a insertar.</param>
+        /// <returns>Respuesta con el resultado de la inserción.</returns>
+        /// <response code="200">La transacción se insertó correctamente.</response>
+        /// <response code="304">La transacción no se pudo insertar debido a datos no modificados.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
@@ -112,7 +112,7 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Obtiene la lista de transacciones de la aplicaci�n.
+        /// Obtiene la lista de transacciones de la aplicación.
         /// </summary>
         /// <returns>Respuesta con la lista de transacciones.</returns>
         /// <response code="200">Lista de transacciones obtenida correctamente.</response>

@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -16,7 +17,7 @@ namespace Inmobiliaria.Api.Controllers
         private readonly ILogger<ServicioEstadosController> _logger;
 
         /// <summary>
-        /// Construtor
+        /// Constructor
         /// </summary>
         public ServicioEstadosController(ILogger<ServicioEstadosController> logger,
             IDatosRead<Estado> datosEstado)
@@ -32,12 +33,14 @@ namespace Inmobiliaria.Api.Controllers
         /// Método  para obtener la lista de estados de la aplicación <br/>
         /// 1 => 'Activo' <br/>
         /// 2 => 'Eliminado'
-        /// <response code="200">El estado se elimin� correctamente.</response>
+        /// <response code="200">El estado se eliminó correctamente.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// </remarks>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
+
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<Estado>> Listar()
         {
             try

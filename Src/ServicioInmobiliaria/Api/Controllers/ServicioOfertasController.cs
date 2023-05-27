@@ -55,8 +55,8 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <param name="id">ID del tipo de oferta a eliminar.</param>
         /// <returns>Respuesta con los resultados de la eliminación.</returns>
-        /// <response code="200">la oferta se elimin� correctamente.</response>
-        /// <response code="404">la oferta no se encontr�.</response>
+        /// <response code="200">la oferta se eliminó correctamente.</response>
+        /// <response code="404">la oferta no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina una oferta <br/>

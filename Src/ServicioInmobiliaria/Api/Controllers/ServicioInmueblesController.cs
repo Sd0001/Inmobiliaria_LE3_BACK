@@ -54,8 +54,8 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <param name="id">ID del tipo inmueble a eliminar.</param>
         /// <returns>Respuesta con los resultados de la eliminación.</returns>
-        /// <response code="200">El inmueble que se elimin� correctamente.</response>
-        /// <response code="404">El inmueble no se encontr�.</response>
+        /// <response code="200">El inmueble que se eliminó correctamente.</response>
+        /// <response code="404">El inmueble no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina un inmueble <br/>

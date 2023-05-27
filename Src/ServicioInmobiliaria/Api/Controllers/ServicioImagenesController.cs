@@ -56,8 +56,8 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <param name="id">ID del tipo de imagen a eliminar.</param>
         /// <returns>Respuesta con los resultados de la eliminación.</returns>
-        /// <response code="200">La imagen se elimin� correctamente.</response>
-        /// <response code="404">La imagen no se encontr�.</response>
+        /// <response code="200">La imagen se eliminó correctamente.</response>
+        /// <response code="404">La imagen no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina la imagen que se tiene publicada para una oferta <br/>

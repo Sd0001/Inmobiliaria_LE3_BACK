@@ -54,8 +54,8 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <param name="id">ID del tipo de persona a eliminar.</param>
         /// <returns>Respuesta con los resultados de la eliminación.</returns>
-        /// <response code="200">La persona se elimin� correctamente.</response>
-        /// <response code="404">La persona no se encontr�.</response>
+        /// <response code="200">La persona se eliminó correctamente.</response>
+        /// <response code="404">La persona no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// <remarks>
         /// Con este método se elimina una persona <br/>

@@ -16,7 +16,7 @@ namespace Api.Controllers
         private readonly ILogger<ServicioUsuariosController> _logger;
 
         /// <summary>
-        /// Construtor
+        /// Constructor
         /// </summary>
         public ServicioUsuariosController(ILogger<ServicioUsuariosController> logger,
             IDatos<Persona> datosPersona)

@@ -18,11 +18,11 @@ namespace Inmobiliaria.Api.Controllers
             _datosSucursal = datosSucursal;
         }
         /// <summary>
-        /// Actualiza los datos de una sucursal en la aplicaci�n.
+        /// Actualiza los datos de una sucursal en la aplicación.
         /// </summary>
         /// <param name="model">Objeto que contiene los datos actualizados de la sucursal.</param>
-        /// <returns>Respuesta con los resultados de la actualizaci�n.</returns>
-        /// <response code="200">La sucursal se actualiz� correctamente.</response>
+        /// <returns>Respuesta con los resultados de la actualización.</returns>
+        /// <response code="200">La sucursal se actualizó correctamente.</response>
         /// <response code="304">No se realizaron cambios en la sucursal.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
@@ -48,12 +48,12 @@ namespace Inmobiliaria.Api.Controllers
             }
         }
         /// <summary>
-        /// Elimina una sucursal de la aplicaci�n.
+        /// Elimina una sucursal de la aplicación.
         /// </summary>
         /// <param name="id">ID de la sucursal a eliminar.</param>
-        /// <returns>Respuesta con los resultados de la eliminaci�n.</returns>
-        /// <response code="200">La sucursal se elimin� correctamente.</response>
-        /// <response code="404">La sucursal no se encontr�.</response>
+        /// <returns>Respuesta con los resultados de la eliminación.</returns>
+        /// <response code="200">La sucursal se eliminó correctamente.</response>
+        /// <response code="404">La sucursal no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
@@ -79,11 +79,11 @@ namespace Inmobiliaria.Api.Controllers
             }
         }
         /// <summary>
-        /// Inserta una nueva sucursal en la aplicaci�n.
+        /// Inserta una nueva sucursal en la aplicación.
         /// </summary>
         /// <param name="model">Objeto que contiene los datos de la sucursal a insertar.</param>
-        /// <returns>Respuesta con los resultados de la inserci�n.</returns>
-        /// <response code="200">La sucursal se insert� correctamente.</response>
+        /// <returns>Respuesta con los resultados de la inserción.</returns>
+        /// <response code="200">La sucursal se insertó correctamente.</response>
         /// <response code="304">No se realizaron cambios en la sucursal.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
@@ -111,7 +111,7 @@ namespace Inmobiliaria.Api.Controllers
 
 
         /// <summary>
-        /// Obtiene la lista de sucursales de la aplicaci�n.
+        /// Obtiene la lista de sucursales de la aplicación.
         /// </summary>
         /// <returns>Respuesta con la lista de sucursales.</returns>
         /// <response code="200">La lista de sucursales se obtuvo correctamente.</response>
