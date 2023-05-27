@@ -132,7 +132,7 @@ namespace Inmobiliaria.Api.Controllers
         {
             try
             {
-                var model = _datosInmueble.Obtener(x=>x.IdEstado==1);//TODO consumir datos
+                var model = _datosInmueble.Obtener();//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
                 return new Respuesta<IEnumerable<Inmueble>> { Completa = true, Mensaje = "", Datos = model };

@@ -50,11 +50,11 @@ namespace Inmobiliaria.Data.SqlServer
             return new Respuesta<Sucursal>() { Completa = true, Datos = entidad };
         }
 
-        public List<Sucursal> Obtener(Func<Sucursal, bool>? filtro = null)
+        public List<Sucursal> Obtener(Expression<Func<Sucursal, bool>>? filtro = null)
         {
             IQueryable<Sucursal> ofertas = _context.Sucursal;
             if (filtro != null)
-                ofertas=  ofertas.Where(FuncToExpression(filtro));
+                ofertas=  ofertas.Where(filtro);
             return ofertas.ToList();
         }
 

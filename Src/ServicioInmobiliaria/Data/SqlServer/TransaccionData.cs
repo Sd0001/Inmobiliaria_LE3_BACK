@@ -49,11 +49,11 @@ namespace Inmobiliaria.Data.SqlServer
             return new Respuesta<Transaccion>() { Completa = true, Datos = entidad };
         }
 
-        public List<Transaccion> Obtener(Func<Transaccion, bool>? filtro = null)
+        public List<Transaccion> Obtener(Expression<Func<Transaccion, bool>>? filtro = null)
         {
             IQueryable<Transaccion> ofertas = _context.Transaccion;
             if (filtro != null)
-                ofertas=  ofertas.Where(FuncToExpression(filtro));
+                ofertas = ofertas.Where(filtro);
             return ofertas.ToList();
         }
 

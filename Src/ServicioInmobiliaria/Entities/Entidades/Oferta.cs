@@ -35,12 +35,16 @@ namespace Inmobiliaria.Entities
 
         [Column("ofe_esalqu")]
         public bool EsVenta { get; set; }
-        public Estado Estado { get; set; }
-        public Inmueble Inmueble { get; set; }
+        public Estado? Estado { get; set; }
+        public Inmueble? Inmueble { get; set; }
 
         [InverseProperty("Oferta")]
-        public IEnumerable<Transaccion> Transacciones { get; set; }
+        public IEnumerable<Transaccion>? Transacciones { get; set; }
         [NotMapped]
-        public bool EstaVendida { get { return Transacciones.Any(); } }
+        public bool EstaVendida { get {
+                if(Transacciones!= null)
+                return Transacciones.Any(); 
+                return false;
+            } }
     }
 }

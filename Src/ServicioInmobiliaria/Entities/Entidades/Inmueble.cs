@@ -43,9 +43,9 @@ namespace Inmobiliaria.Entities
         [Column("imn_tnparq")]
         public bool TieneParqueadero { get; set; }
 
-        public Sucursal Sucursal { get; set; }
-        public TipoInmueble TipoInmueble { get; set; }
-        public Persona Persona { get; set; }
-        public Estado Estado { get; set; }
+        public Sucursal? Sucursal { get; set; }
+        public TipoInmueble? TipoInmueble { get; set; }
+        public Persona? Persona { get; set; }
+        public Estado? Estado { get; set; }
     }
 }

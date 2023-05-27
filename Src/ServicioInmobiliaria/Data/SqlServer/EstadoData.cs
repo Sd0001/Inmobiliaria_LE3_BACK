@@ -22,11 +22,11 @@ namespace Inmobiliaria.Data.SqlServer
             _context =  new InmobiliariaContext(optionsBuilder.Options);
         }
        
-        public List<Estado> Obtener(Func<Estado, bool>? filtro = null)
+        public List<Estado> Obtener(Expression<Func<Estado, bool>>? filtro = null)
         {
             IQueryable<Estado> ofertas = _context.Estado;
             if (filtro != null)
-                ofertas=  ofertas.Where(FuncToExpression(filtro));
+                ofertas=  ofertas.Where(filtro);
             return ofertas.ToList();
         }
 

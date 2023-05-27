@@ -27,7 +27,7 @@ namespace Inmobiliaria.Entities
         [Column("vis_coment")]
         public string? Comentario { get; set; }
         
-        public Persona Persona { get; set; }
-        public Oferta Oferta { get; set; }
+        public Persona? Persona { get; set; }
+        public Oferta? Oferta { get; set; }
     }
 }
