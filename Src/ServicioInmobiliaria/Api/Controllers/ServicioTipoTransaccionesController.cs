@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -19,14 +20,17 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Obtiene la lista de tipos de transacciones de la aplicación.
+        /// Obtiene la lista de tipos de transacciones de la aplicaciï¿½n.
         /// </summary>
         /// <returns>Respuesta con la lista de tipos de transacciones.</returns>
         /// <response code="200">La lista de tipos de transacciones se obtuvo correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoTransaccion>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoTransaccion>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<TipoTransaccion>> Listar()
         {
             try

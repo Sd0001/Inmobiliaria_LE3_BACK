@@ -34,10 +34,12 @@ namespace Inmobiliaria.Api.Controllers
         /// 1 => 'Activo' <br/>
         /// 2 => 'Eliminado'
         /// <response code="200">El estado se eliminó correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         /// </remarks>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
 
         [TypeFilter(typeof(AuthorizeActionFilter))]

@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -37,7 +38,9 @@ namespace Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Respuesta<>))]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<bool> Validar(string usuario, string contrasena)
         {
             try

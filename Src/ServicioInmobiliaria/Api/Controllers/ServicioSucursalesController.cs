@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -24,11 +25,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con los resultados de la actualización.</returns>
         /// <response code="200">La sucursal se actualizó correctamente.</response>
         /// <response code="304">No se realizaron cambios en la sucursal.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Sucursal> Actualizar(Sucursal model)
         {
             try
@@ -53,13 +57,15 @@ namespace Inmobiliaria.Api.Controllers
         /// <param name="id">ID de la sucursal a eliminar.</param>
         /// <returns>Respuesta con los resultados de la eliminación.</returns>
         /// <response code="200">La sucursal se eliminó correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="404">La sucursal no se encontró.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
-
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Sucursal> Eliminar(int id)
         {
             try
@@ -85,11 +91,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con los resultados de la inserción.</returns>
         /// <response code="200">La sucursal se insertó correctamente.</response>
         /// <response code="304">No se realizaron cambios en la sucursal.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Sucursal>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Sucursal> Insertar(Sucursal model)
         {
             try
@@ -115,15 +124,18 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <returns>Respuesta con la lista de sucursales.</returns>
         /// <response code="200">La lista de sucursales se obtuvo correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Sucursal>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Sucursal>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<Sucursal>> Listar()
         {
             try
             {
-                var model = _datosSucursal.Obtener(x=>x.IdEstado==1);//TODO consumir datos
+                var model = _datosSucursal.Obtener(x => x.IdEstado == 1);//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
                 return new Respuesta<IEnumerable<Sucursal>> { Completa = true, Mensaje = "", Datos = model };

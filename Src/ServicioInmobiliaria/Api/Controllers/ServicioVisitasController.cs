@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -25,11 +26,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con el resultado de la operación.</returns>
         /// <response code="200">Los datos de la visita se actualizaron correctamente.</response>
         /// <response code="304">No se realizaron cambios en los datos de la visita.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Visita> Actualizar(Visita model)
         {
             try
@@ -54,12 +58,15 @@ namespace Inmobiliaria.Api.Controllers
         /// <param name="id">ID de la visita a eliminar.</param>
         /// <returns>Respuesta con el resultado de la operación.</returns>
         /// <response code="200">La visita se eliminó correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="404">La visita no fue encontrada.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Visita> Eliminar(int id)
         {
             try
@@ -86,11 +93,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con el resultado de la operación.</returns>
         /// <response code="200">La visita se insertó correctamente.</response>
         /// <response code="304">No se modificó ningún recurso existente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Visita>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Visita> Insertar(Visita model)
         {
             try
@@ -115,10 +125,13 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <returns>Respuesta con la lista de visitas.</returns>
         /// <response code="200">La operación se completó correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Visita>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Visita>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<Visita>> Listar()
         {
             try

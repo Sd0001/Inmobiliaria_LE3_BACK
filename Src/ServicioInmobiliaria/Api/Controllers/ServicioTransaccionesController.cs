@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -25,11 +26,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con el resultado de la actualización.</returns>
         /// <response code="200">Los datos de la transacción se actualizaron correctamente.</response>
         /// <response code="304">No se realizaron cambios en los datos de la transacción.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Transaccion> Actualizar(Transaccion model)
         {
             try
@@ -55,12 +59,15 @@ namespace Inmobiliaria.Api.Controllers
         /// <param name="id">ID de la transacción a eliminar.</param>
         /// <returns>Respuesta con el resultado de la eliminación.</returns>
         /// <response code="200">La transacción se eliminó correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="404">La transacción con el ID especificado no fue encontrada.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Transaccion> Eliminar(int id)
         {
             try
@@ -87,11 +94,14 @@ namespace Inmobiliaria.Api.Controllers
         /// <returns>Respuesta con el resultado de la inserción.</returns>
         /// <response code="200">La transacción se insertó correctamente.</response>
         /// <response code="304">La transacción no se pudo insertar debido a datos no modificados.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<Transaccion>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<Transaccion> Insertar(Transaccion model)
         {
             try
@@ -116,15 +126,18 @@ namespace Inmobiliaria.Api.Controllers
         /// </summary>
         /// <returns>Respuesta con la lista de transacciones.</returns>
         /// <response code="200">Lista de transacciones obtenida correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Transaccion>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<Transaccion>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<Transaccion>> Listar()
         {
             try
             {
-                var model = _datosTransaccion.Obtener(x=>x.IdEstado==1);//TODO consumir datos
+                var model = _datosTransaccion.Obtener(x => x.IdEstado == 1);//TODO consumir datos
                 this.Response.StatusCode = (int)HttpStatusCode.OK;
 
                 return new Respuesta<IEnumerable<Transaccion>> { Completa = true, Mensaje = "", Datos = model };

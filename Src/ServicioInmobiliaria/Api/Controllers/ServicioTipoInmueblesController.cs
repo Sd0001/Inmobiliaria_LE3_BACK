@@ -1,5 +1,6 @@
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobiliaria.Api.Modules;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -17,21 +18,23 @@ namespace Inmobiliaria.Api.Controllers
             _logger = logger;
             _datosTipoInmueble = datosTipoInmueble;
         }
-        
-        
+
+
         /// <summary>
-        /// Actualiza los datos de un tipo de inmueble en la aplicación.
+        /// Actualiza los datos de un tipo de inmueble en la aplicaciÃ³n.
         /// </summary>
         /// <param name="model">Objeto que contiene los datos actualizados del tipo de inmueble.</param>
-        /// <returns>Respuesta con los resultados de la actualización.</returns>
-        /// <response code="200">El tipo de inmueble se actualizó correctamente.</response>
+        /// <returns>Respuesta con los resultados de la actualizaciÃ³n.</returns>
+        /// <response code="200">El tipo de inmueble se actualizÃ³ correctamente.</response>
         /// <response code="304">No se realizaron cambios en el tipo de inmueble.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPut]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
-
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<TipoInmueble> Actualizar(TipoInmueble model)
         {
             try
@@ -52,17 +55,20 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Elimina un tipo de inmueble de la aplicación.
+        /// Elimina un tipo de inmueble de la aplicaciÃ³n.
         /// </summary>
         /// <param name="id">ID del tipo de inmueble a eliminar.</param>
-        /// <returns>Respuesta con los resultados de la eliminación.</returns>
-        /// <response code="200">El tipo de inmueble se eliminó correctamente.</response>
-        /// <response code="404">El tipo de inmueble no se encontró.</response>
+        /// <returns>Respuesta con los resultados de la eliminaciÃ³n.</returns>
+        /// <response code="200">El tipo de inmueble se eliminÃ³ correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
+        /// <response code="404">El tipo de inmueble no se encontrÃ³.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<TipoInmueble> Eliminar(int id)
         {
             try
@@ -83,17 +89,20 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Inserta un nuevo tipo de inmueble en la aplicación.
+        /// Inserta un nuevo tipo de inmueble en la aplicaciÃ³n.
         /// </summary>
         /// <param name="model">Objeto que contiene los datos del tipo de inmueble a insertar.</param>
-        /// <returns>Respuesta con los resultados de la inserción.</returns>
-        /// <response code="200">El tipo de inmueble se insertó correctamente.</response>
+        /// <returns>Respuesta con los resultados de la inserciÃ³n.</returns>
+        /// <response code="200">El tipo de inmueble se insertÃ³ correctamente.</response>
         /// <response code="304">No se realizaron cambios en el tipo de inmueble.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpPost]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotModified)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<TipoInmueble>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<TipoInmueble> Insertar(TipoInmueble model)
         {
             try
@@ -114,14 +123,17 @@ namespace Inmobiliaria.Api.Controllers
         }
 
         /// <summary>
-        /// Obtiene la lista de tipos de inmuebles de la aplicación.
+        /// Obtiene la lista de tipos de inmuebles de la aplicaciï¿½n.
         /// </summary>
         /// <returns>Respuesta con la lista de tipos de inmuebles.</returns>
         /// <response code="200">La lista de tipos de inmuebles se obtuvo correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
         /// <response code="500">Error interno del servidor.</response>
         [HttpGet]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoInmueble>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
         [ProducesResponseType(typeof(Respuesta<IEnumerable<TipoInmueble>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
         public Respuesta<IEnumerable<TipoInmueble>> Listar()
         {
             try
