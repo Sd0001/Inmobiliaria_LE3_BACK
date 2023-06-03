@@ -71,10 +71,5 @@ namespace Inmobiliaria.Data.SqlServer
                 .Include(x => x.Transacciones)
                 .FirstOrDefault(x=>x.Id == id);
         }
-
-        private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
-        {
-            return x => f(x);
-        }
     }
 }

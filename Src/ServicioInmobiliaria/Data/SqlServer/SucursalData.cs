@@ -62,10 +62,5 @@ namespace Inmobiliaria.Data.SqlServer
         {
             return _context?.Sucursal?.Include(x => x.Estado).FirstOrDefault(x=>x.Id == id);
         }
-
-        private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
-        {
-            return x => f(x);
-        }
     }
 }

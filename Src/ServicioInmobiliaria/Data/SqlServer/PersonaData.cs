@@ -59,10 +59,5 @@ namespace Inmobiliaria.Data.SqlServer
         {
             return _context?.Persona?.FirstOrDefault(x=>x.Id == id);
         }
-
-        private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
-        {
-            return x => f(x);
-        }
     }
 }
