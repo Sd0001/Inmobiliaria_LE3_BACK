@@ -13,7 +13,7 @@ namespace Inmobiliaria.Entities
 
         [Column("inm_id")]
         [ForeignKey("Inmueble")]
-        public int IdInmueblle { get; set; }
+        public int IdInmueble { get; set; }
 
         [Column("est_id")]
         [ForeignKey("Estado")]
