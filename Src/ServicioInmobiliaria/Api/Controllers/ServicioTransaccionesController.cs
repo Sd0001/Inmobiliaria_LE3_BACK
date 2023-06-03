@@ -149,5 +149,36 @@ namespace Inmobiliaria.Api.Controllers
                 return new Respuesta<IEnumerable<Transaccion>> { Completa = false, Mensaje = ex.Message, Datos = null };
             }
         }
+
+
+        /// <summary>
+        /// Obtiene la lista de transacciones de la aplicación para una oferta.
+        /// </summary>
+        /// <returns>Respuesta con la lista de transacciones.</returns>
+        /// <response code="200">Lista de transacciones obtenida correctamente.</response>
+        /// <response code="401">Credenciales incorrectas.</response>
+        /// <response code="500">Error interno del servidor.</response>
+        [HttpGet]
+        [Route("api/[controller]/Oferta")]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<Transaccion>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(Respuesta<>))]
+        [ProducesResponseType(typeof(Respuesta<IEnumerable<Transaccion>>), (int)HttpStatusCode.InternalServerError)]
+        [TypeFilter(typeof(AuthorizeActionFilter))]
+        public Respuesta<IEnumerable<Transaccion>> ListarOferta(int idOferta)
+        {
+            try
+            {
+                var model = _datosTransaccion.Obtener(x => x.IdOferta == idOferta && x.IdEstado == 1);//TODO consumir datos
+                this.Response.StatusCode = (int)HttpStatusCode.OK;
+
+                return new Respuesta<IEnumerable<Transaccion>> { Completa = true, Mensaje = "", Datos = model };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                this.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return new Respuesta<IEnumerable<Transaccion>> { Completa = false, Mensaje = ex.Message, Datos = null };
+            }
+        }
     }
 }

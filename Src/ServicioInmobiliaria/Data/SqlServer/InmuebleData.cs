@@ -47,19 +47,28 @@ namespace Inmobiliaria.Data.SqlServer
             _context.SaveChanges();
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
-               
+
 
         public List<Inmueble> Obtener(Expression<Func<Inmueble, bool>>? filtro = null)
         {
-            IQueryable<Inmueble> ofertas = _context.Inmueble;
+            IQueryable<Inmueble> ofertas = _context.Inmueble
+                    .Include(x => x.Estado)
+                    .Include(x => x.Sucursal)
+                    .Include(x => x.TipoInmueble)
+                    .Include(x => x.Persona);
             if (filtro != null)
-                ofertas=  ofertas.Where(filtro);
+                ofertas = ofertas.Where(filtro);
             return ofertas.ToList();
         }
 
         public Inmueble? Obtener(int id)
         {
-            return _context?.Inmueble?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Inmueble?
+                    .Include(x => x.Estado)
+                    .Include(x => x.Sucursal)
+                    .Include(x => x.TipoInmueble)
+                    .Include(x => x.Persona)
+                    .FirstOrDefault(x=>x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)

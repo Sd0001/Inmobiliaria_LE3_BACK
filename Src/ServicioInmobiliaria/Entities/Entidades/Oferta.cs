@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Inmobiliaria.Entities
 {
@@ -38,8 +39,13 @@ namespace Inmobiliaria.Entities
         public Estado? Estado { get; set; }
         public Inmueble? Inmueble { get; set; }
 
+        [JsonIgnore]
         [InverseProperty("Oferta")]
-        public List<Transaccion>? Transacciones { get; set; }
+        public ICollection<Transaccion>? Transacciones { get; set; }
+
+        [InverseProperty("Oferta")]
+        public ICollection<Imagen>? Imagenes { get; set; }
+
         [NotMapped]
         public bool EstaVendida { get {
                 if(Transacciones!= null)

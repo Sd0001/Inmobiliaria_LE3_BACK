@@ -51,7 +51,12 @@ namespace Inmobiliaria.Data.SqlServer
 
         public List<Transaccion> Obtener(Expression<Func<Transaccion, bool>>? filtro = null)
         {
-            IQueryable<Transaccion> ofertas = _context.Transaccion;
+            IQueryable<Transaccion> ofertas = _context.Transaccion
+                .Include(x => x.Estado)
+                .Include(x => x.Oferta).ThenInclude(x => x.Inmueble).ThenInclude(x => x.Persona)
+                .Include(x => x.Oferta).ThenInclude(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
+                .Include(x => x.TipoTransaccion)
+                .Include(x => x.Persona);
             if (filtro != null)
                 ofertas = ofertas.Where(filtro);
             return ofertas.ToList();
@@ -59,7 +64,13 @@ namespace Inmobiliaria.Data.SqlServer
 
         public Transaccion? Obtener(int id)
         {
-            return _context?.Transaccion?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Transaccion?
+                .Include(x => x.Estado)
+                .Include(x => x.Oferta).ThenInclude(x => x.Inmueble).ThenInclude(x => x.Persona)
+                .Include(x => x.Oferta).ThenInclude(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
+                .Include(x => x.TipoTransaccion)
+                .Include(x => x.Persona)
+                .FirstOrDefault(x=>x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)

@@ -51,7 +51,9 @@ namespace Inmobiliaria.Data.SqlServer
                 .Include(x => x.Inmueble).ThenInclude(x => x.Sucursal)
                 .Include(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
                 .Include(x => x.Inmueble).ThenInclude(x => x.Persona)
-                .Include(x => x.Inmueble).ThenInclude(x => x.Estado);
+                .Include(x => x.Inmueble).ThenInclude(x => x.Estado)
+                .Include(x => x.Imagenes)
+                .Include(x => x.Transacciones);
             if (filtro != null)
                 ofertas = ofertas.Where(filtro);
             return ofertas.ToList();
@@ -65,6 +67,8 @@ namespace Inmobiliaria.Data.SqlServer
                 .Include(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
                 .Include(x => x.Inmueble).ThenInclude(x => x.Persona)
                 .Include(x => x.Inmueble).ThenInclude(x => x.Estado)
+                .Include(x => x.Imagenes)
+                .Include(x => x.Transacciones)
                 .FirstOrDefault(x=>x.Id == id);
         }
 

@@ -52,7 +52,7 @@ namespace Inmobiliaria.Data.SqlServer
 
         public List<Sucursal> Obtener(Expression<Func<Sucursal, bool>>? filtro = null)
         {
-            IQueryable<Sucursal> ofertas = _context.Sucursal;
+            IQueryable<Sucursal> ofertas = _context.Sucursal .Include(x=>x.Estado);
             if (filtro != null)
                 ofertas=  ofertas.Where(filtro);
             return ofertas.ToList();
@@ -60,7 +60,7 @@ namespace Inmobiliaria.Data.SqlServer
 
         public Sucursal? Obtener(int id)
         {
-            return _context?.Sucursal?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Sucursal?.Include(x => x.Estado).FirstOrDefault(x=>x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
