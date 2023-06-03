@@ -39,7 +39,7 @@ namespace Inmobiliaria.Entities
         public Inmueble? Inmueble { get; set; }
 
         [InverseProperty("Oferta")]
-        public IEnumerable<Transaccion>? Transacciones { get; set; }
+        public List<Transaccion>? Transacciones { get; set; }
         [NotMapped]
         public bool EstaVendida { get {
                 if(Transacciones!= null)

@@ -8,12 +8,14 @@ namespace Inmobilliaria.Data
         public InmobiliariaContext(DbContextOptions options) : base(options)
         {
         }
-
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Para las vistas
-            //modelBuilder.Entity<Componentes>().HasNoKey();
-           
+            modelBuilder.Entity<Transaccion>(e =>
+            {
+                e.HasOne(r => r.Oferta).WithMany(u => u.Transacciones).HasForeignKey(r => r.IdOferta);
+            });
+
         }
 
         public DbSet<Estado> Estado { get; set; }

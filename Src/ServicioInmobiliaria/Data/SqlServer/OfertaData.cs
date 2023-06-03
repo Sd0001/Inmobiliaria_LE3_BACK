@@ -46,15 +46,26 @@ namespace Inmobiliaria.Data.SqlServer
 
         public List<Oferta> Obtener(Expression<Func<Oferta, bool>>? filtro = null)
         {
-            IQueryable<Oferta> ofertas = _context.Oferta;
+            IQueryable<Oferta> ofertas = _context.Oferta
+                .Include(x => x.Estado)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Sucursal)
+                .Include(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Persona)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Estado);
             if (filtro != null)
-                ofertas=  ofertas.Where(filtro);
+                ofertas = ofertas.Where(filtro);
             return ofertas.ToList();
         }
 
         public Oferta? Obtener(int id)
         {
-            return _context?.Oferta?.FirstOrDefault(x=>x.Id == id);
+            return _context?.Oferta?
+                .Include(x => x.Estado)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Sucursal)
+                .Include(x => x.Inmueble).ThenInclude(x => x.TipoInmueble)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Persona)
+                .Include(x => x.Inmueble).ThenInclude(x => x.Estado)
+                .FirstOrDefault(x=>x.Id == id);
         }
 
         private static Expression<Func<T, bool>> FuncToExpression<T>(Func<T, bool> f)
