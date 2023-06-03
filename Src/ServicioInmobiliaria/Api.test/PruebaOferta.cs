@@ -76,7 +76,7 @@ namespace test.Api
             Assert.NotEqual(resultado2.Montoalquiler, 500000);
 
             //Prueba eliminar la Oferta creada
-            var resultado3 = EliminarOferta(resultado.Datos);
+            var resultado3 = EliminarOferta(resultado.Datos.);
             Assert.True(resultado3.Completa);
             var resultado4 = datosOferta.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);

@@ -7,17 +7,35 @@ namespace test.Api
     public class PruebaInmuebles : TestBase
     {
         IDatos<Inmueble> datosInmueble;
+        private PruebaSucursales pruebaSucursales;
+        private PruebaPersonas pruebaPersonas;
         public PruebaInmuebles()
         {
             this.datosInmueble = new InmuebleData(_dbConfig);
+            this.pruebaSucursales = new PruebaSucursales();
+            this.pruebaPersonas= new PruebaPersonas();
         }
         public Respuesta<Inmueble> CrearInmueble()
         {
+            var sucursal = pruebaSucursales.CrearSucursal();
+            var persona = pruebaPersonas.CrearPersona();
 
             ///Crear una nueva Inmueble
             var Inmueble = new Inmueble
             {
-                
+                IdSucursal = sucursal?.Datos?.Id ?? 0,
+                Superficie = 50,
+                Direccion = "calle 64 #54",
+                NroBanios= 1,
+                NroCocinas= 1,
+                NroHabitaciones= 3, 
+                TieneGas= true,
+                TieneParqueadero= true, 
+                Referencia= "3434343",
+                IdEstado= 1,
+                IdTipoInmueble= 1, 
+                IdPersona= persona?.Datos?.Id ?? 0,
+
             };
             var Resultado = datosInmueble.Insertar(Inmueble);
             return Resultado;
@@ -26,14 +44,19 @@ namespace test.Api
         {
 
 
-            Inmueble.Apellido = "Quintero";
+            Inmueble.Superficie = 100;
             return datosInmueble.Actualizar(Inmueble);
 
         }
 
-        public Respuesta<Inmueble> EliminarInmueble(int id)
+        public Respuesta<Inmueble> EliminarInmueble(Inmueble inmueble)
         {
-            return datosInmueble.Eliminar(id);
+
+            var resultado = datosInmueble.Eliminar(inmueble.Id);
+            var persona = pruebaPersonas.EliminarPersona(inmueble.IdPersona);
+            var sucursal = pruebaSucursales.EliminarSucursal(inmueble.IdSucursal);
+            return resultado;
+            
         }
         /// <summary>
         /// Validar que se crea y se elimine una Inmueble
