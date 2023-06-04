@@ -21,6 +21,15 @@ builder.Services.AddScoped<IDatos<Visita>, VisitaData>();
 builder.Services.AddScoped<IDatosRead<Estado>, EstadoData>();
 builder.Services.AddScoped<IDatosRead<TipoTransaccion>, TipoTransaccionData>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("cors",
+    builder =>
+    {
+       // builder.WithOrigins("localhost").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var connectionString = "";
 
@@ -64,7 +73,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 //app.UseHttpsRedirection();
-
+app.UseCors("cors");
 app.UseAuthorization();
 
 app.MapControllers(); 
