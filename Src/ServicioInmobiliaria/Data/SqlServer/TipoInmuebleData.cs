@@ -29,7 +29,7 @@ namespace Inmobiliaria.Data.SqlServer
             return new Respuesta<TipoInmueble>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<TipoInmueble> Eliminar(int id)
+        public Respuesta<TipoInmueble> Eliminar(int id, bool logica = true)
         {
             var entidad = _context.TipoInmueble.Find(id);
             if (entidad == null)

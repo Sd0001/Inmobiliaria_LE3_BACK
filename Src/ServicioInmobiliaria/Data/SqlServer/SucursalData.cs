@@ -29,19 +29,25 @@ namespace Inmobiliaria.Data.SqlServer
             return new Respuesta<Sucursal>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<Sucursal> Eliminar(int id)
+        public Respuesta<Sucursal> Eliminar(int id, bool logica = true)
         {
             var entidad = _context.Sucursal.Find(id);
             if (entidad == null)
                 return new Respuesta<Sucursal>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
-
-            //_context.Remove(entidad);
-             entidad.IdEstado=2;
-            _context.Update(entidad);
-            _context.SaveChanges();
+            if (logica)
+            {
+                //_context.Remove(entidad);
+                entidad.IdEstado = 2;
+                _context.Update(entidad);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.Remove(entidad);
+                _context.SaveChanges();
+            }
             return new Respuesta<Sucursal>() { Completa = true, Datos = entidad };
         }
-
 
         public Respuesta<Sucursal> Insertar(Sucursal entidad)
         {

@@ -9,50 +9,44 @@ namespace test.Api
         IDatos<Oferta> datosOferta;
         private PruebaInmuebles pruebaInmuebles;
 
+        public static Oferta? created;
+
         public PruebaOferta()
         {
-
             this.datosOferta = new OfertaData(_dbConfig);
             this.pruebaInmuebles = new PruebaInmuebles();
         }
         public Respuesta<Oferta> CrearOferta()
         {
             var inmueble = pruebaInmuebles.CrearInmueble();
-
-
+            Persona? persona;
+         
             ///Crear una nueva Oferta
             var Oferta = new Oferta
-            {
-                IdEstado = 1,
-                FechaInicio = DateTime.Now,
-                Fechafin = DateTime.Now.AddDays(4),
-                MontoVenta = 100000000,
-                EsAlquiler = true,
-                EsVenta = false,
-                Montoalquiler= 1000000,
-                IdInmueble = inmueble?.Datos?.Id??0,
-               
-
-            };
-            var Resultado = datosOferta.Insertar(Oferta);
-            return Resultado;
+                {
+                    IdEstado = 1,
+                    FechaInicio = DateTime.Now,
+                    Fechafin = DateTime.Now.AddDays(4),
+                    MontoVenta = 100000000,
+                    EsAlquiler = true,
+                    EsVenta = false,
+                    Montoalquiler = 1000000,
+                    IdInmueble = inmueble?.Datos?.Id ?? 0,
+                };
+            var resultado = datosOferta.Insertar(Oferta);
+            created = resultado?.Datos;
+            return resultado;
         }
         public Respuesta<Oferta> ActualizarOferta(Oferta Oferta)
         {
-
             Oferta.Montoalquiler = 500000;
-           
             return datosOferta.Actualizar(Oferta);
-
         }
 
-        public Respuesta<Oferta> EliminarOferta(Oferta oferta)
+        public Respuesta<Oferta> EliminarOferta()
         {
-
-           
-
-            var resultado = datosOferta.Eliminar(oferta.Id);
-            var inmueble = pruebaInmuebles.EliminarInmueble(oferta.IdInmueble);
+            var resultado = datosOferta.Eliminar(created.Id,false);
+            var inmueble = pruebaInmuebles.EliminarInmueble();
             return resultado;
         }
         /// <summary>
@@ -73,17 +67,13 @@ namespace test.Api
             Assert.NotNull(resultado.Datos);
             var resultado2 = datosOferta.Obtener(resultado.Datos.Id);
             Assert.NotNull(resultado2);
-            Assert.NotEqual(resultado2.Montoalquiler, 500000);
+            Assert.NotEqual(resultado2.Montoalquiler, 100000000);
 
             //Prueba eliminar la Oferta creada
-            var resultado3 = EliminarOferta(resultado.Datos.);
+            var resultado3 = EliminarOferta();
             Assert.True(resultado3.Completa);
             var resultado4 = datosOferta.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);
-
-
-
         }
-
     }
 }

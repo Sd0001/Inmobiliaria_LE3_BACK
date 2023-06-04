@@ -4,7 +4,7 @@
     {
         Respuesta<T> Actualizar(T entidad);
 
-        Respuesta<T> Eliminar(int id);
+        Respuesta<T> Eliminar(int id, bool logica = true);
 
         Respuesta<T> Insertar(T entidad);
     }

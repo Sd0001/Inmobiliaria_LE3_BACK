@@ -29,25 +29,32 @@ namespace Inmobiliaria.Data.SqlServer
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
 
-        public Respuesta<Inmueble> Eliminar(int id)
+        public Respuesta<Inmueble> Eliminar(int id, bool logica = true)
         {
             var entidad = _context.Inmueble.Find(id);
             if (entidad == null)
                 return new Respuesta<Inmueble>() { Completa = false, Datos = entidad, Mensaje = "No existe el elemento que quiere eliminar" };
-
-            //_context.Remove(entidad);
-            entidad.IdEstado=2;
-            _context.Update(entidad);
-            _context.SaveChanges();
+            if (logica)
+            {
+                //_context.Remove(entidad);
+                entidad.IdEstado = 2;
+                _context.Update(entidad);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.Remove(entidad);
+                _context.SaveChanges();
+            }
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
+
         public Respuesta<Inmueble> Insertar(Inmueble entidad)
         {
             _context.Add(entidad);
             _context.SaveChanges();
             return new Respuesta<Inmueble>() { Completa = true, Datos = entidad };
         }
-
 
         public List<Inmueble> Obtener(Expression<Func<Inmueble, bool>>? filtro = null)
         {
@@ -68,7 +75,7 @@ namespace Inmobiliaria.Data.SqlServer
                     .Include(x => x.Sucursal)
                     .Include(x => x.TipoInmueble)
                     .Include(x => x.Persona)
-                    .FirstOrDefault(x=>x.Id == id);
+                    .FirstOrDefault(x => x.Id == id);
         }
     }
 }

@@ -7,23 +7,23 @@ namespace test.Api
     public class PruebaInmuebles : TestBase
     {
         IDatos<Inmueble> datosInmueble;
-        private PruebaSucursales pruebaSucursales;
         private PruebaPersonas pruebaPersonas;
+
+        public static Inmueble? created;
+
         public PruebaInmuebles()
         {
             this.datosInmueble = new InmuebleData(_dbConfig);
-            this.pruebaSucursales = new PruebaSucursales();
             this.pruebaPersonas= new PruebaPersonas();
         }
         public Respuesta<Inmueble> CrearInmueble()
         {
-            var sucursal = pruebaSucursales.CrearSucursal();
             var persona = pruebaPersonas.CrearPersona();
 
             ///Crear una nueva Inmueble
             var Inmueble = new Inmueble
             {
-                IdSucursal = sucursal?.Datos?.Id ?? 0,
+                IdSucursal = 1,
                 Superficie = 50,
                 Direccion = "calle 64 #54",
                 NroBanios= 1,
@@ -38,23 +38,19 @@ namespace test.Api
 
             };
             var Resultado = datosInmueble.Insertar(Inmueble);
+            created = Resultado.Datos;
             return Resultado;
         }
         public Respuesta<Inmueble> ActualizarInmueble(Inmueble Inmueble)
         {
-
-
             Inmueble.Superficie = 100;
             return datosInmueble.Actualizar(Inmueble);
-
         }
 
-        public Respuesta<Inmueble> EliminarInmueble(Inmueble inmueble)
+        public Respuesta<Inmueble> EliminarInmueble()
         {
-
-            var resultado = datosInmueble.Eliminar(inmueble.Id);
-            var persona = pruebaPersonas.EliminarPersona(inmueble.IdPersona);
-            var sucursal = pruebaSucursales.EliminarSucursal(inmueble.IdSucursal);
+            var resultado = datosInmueble.Eliminar(created.Id,false);
+            var persona = pruebaPersonas.EliminarPersona();
             return resultado;
             
         }
@@ -76,10 +72,10 @@ namespace test.Api
             Assert.NotNull(resultado.Datos);
             var resultado2 = datosInmueble.Obtener(resultado.Datos.Id);
             Assert.NotNull(resultado2);
-            Assert.NotEqual(resultado2.Apellido, "zapata");
+            Assert.NotEqual(resultado2.Superficie, 50);
 
             //Prueba eliminar la Inmueble creada
-            var resultado3 = EliminarInmueble(resultado.Datos.Id);
+            var resultado3 = EliminarInmueble();
             Assert.True(resultado3.Completa);
             var resultado4 = datosInmueble.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);

@@ -7,6 +7,9 @@ namespace test.Api
     public class PruebaPersonas : TestBase
     {
         IDatos<Persona> datosPersona;
+
+        public static Persona? created;
+
         public PruebaPersonas() { 
            this.datosPersona = new PersonaData(_dbConfig);
         }
@@ -23,8 +26,9 @@ namespace test.Api
                 Email = "alejo.zapata",
                 Telefono = "8879545"
             };
-            var Resultado = datosPersona.Insertar(persona);
-            return Resultado;
+            var resultado = datosPersona.Insertar(persona);
+            created = resultado.Datos;
+            return resultado;
         }
         public Respuesta<Persona> ActualizarPersona(Persona persona)
         {
@@ -35,9 +39,9 @@ namespace test.Api
 
         }
 
-        public Respuesta<Persona> EliminarPersona(int id)
+        public Respuesta<Persona> EliminarPersona()
         {
-            return datosPersona.Eliminar(id);
+            return datosPersona.Eliminar(created.Id, false);
         }
         /// <summary>
         /// Validar que se crea y se elimine una persona
@@ -60,7 +64,7 @@ namespace test.Api
             Assert.NotEqual(resultado2.Apellido, "zapata");
 
             //Prueba eliminar la persona creada
-            var resultado3 = EliminarPersona(resultado.Datos.Id);
+            var resultado3 = EliminarPersona();
             Assert.True(resultado3.Completa);
             var resultado4 = datosPersona.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);
