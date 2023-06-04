@@ -1,6 +1,9 @@
 using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace test.Api
 {
@@ -12,7 +15,14 @@ namespace test.Api
         [Fact]
         public void CantidadEstados()
         {
-            IDatosRead<Estado> datosEstado = new EstadoData(_dbConfig);
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            var db = new InmobiliariaContext(optionsBuilder.Options);
+            db.Estado.Add(new Estado { Id = 1, Nombre = "Activo" });
+            db.Estado.Add(new Estado { Id = 2, Nombre = "Eliminado" });
+            db.SaveChanges();
+
+            IDatosRead<Estado> datosEstado = new EstadoData(db);
             var listaEstados = datosEstado.Obtener();
             // verificar que hay algún estado
             Assert.True(listaEstados.Any());

@@ -2,6 +2,8 @@ using Inmobiliaria.Api.Controllers;
 using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -18,6 +20,14 @@ builder.Services.AddScoped<IDatos<Transaccion>, TransaccionData>();
 builder.Services.AddScoped<IDatos<Visita>, VisitaData>();
 builder.Services.AddScoped<IDatosRead<Estado>, EstadoData>();
 builder.Services.AddScoped<IDatosRead<TipoTransaccion>, TipoTransaccionData>();
+
+
+var connectionString = "";
+
+connectionString = builder.Configuration.GetConnectionString("Pruebas");
+
+builder.Services.AddDbContext<InmobiliariaContext>(
+       options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers(); 
 builder.Services.AddSwaggerGen(options =>
@@ -42,10 +52,6 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
-
-var connectionString = "";
-
-connectionString = builder.Configuration.GetConnectionString("Pruebas");
 
 
 var dbConfig = new DbConfig();

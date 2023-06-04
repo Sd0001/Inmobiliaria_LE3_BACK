@@ -1,13 +1,7 @@
 ﻿using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
 using Inmobilliaria.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inmobiliaria.Data.SqlServer
 {
@@ -15,11 +9,9 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public EstadoData(DbConfig conn)
+        public EstadoData(InmobiliariaContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
-            optionsBuilder.UseSqlServer(conn.ConnectionString);
-            _context =  new InmobiliariaContext(optionsBuilder.Options);
+            _context = context;
         }
        
         public List<Estado> Obtener(Expression<Func<Estado, bool>>? filtro = null)

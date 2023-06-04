@@ -1,6 +1,9 @@
 ﻿using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace test.Api
 {
@@ -12,7 +15,11 @@ namespace test.Api
 
         public PruebaSucursales()
         {
-            this.datosSucursal = new SucursalData(_dbConfig);
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            var db = new InmobiliariaContext(optionsBuilder.Options);
+            this.datosSucursal = new SucursalData(db);
+            db.Estado.Add(new Estado { Id = 1, Nombre = "Activo" });
         }
         public Respuesta<Sucursal> CrearSucursal()
         {

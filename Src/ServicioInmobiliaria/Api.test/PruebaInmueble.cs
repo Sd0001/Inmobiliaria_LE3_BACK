@@ -1,6 +1,9 @@
 ﻿using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace test.Api
 {
@@ -8,33 +11,41 @@ namespace test.Api
     {
         IDatos<Inmueble> datosInmueble;
         private PruebaPersonas pruebaPersonas;
+        private PruebaSucursales pruebaSucursales;
 
         public static Inmueble? created;
 
         public PruebaInmuebles()
         {
-            this.datosInmueble = new InmuebleData(_dbConfig);
-            this.pruebaPersonas= new PruebaPersonas();
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            var db = new InmobiliariaContext(optionsBuilder.Options);
+
+            this.datosInmueble = new InmuebleData(db);
+            this.pruebaPersonas = new PruebaPersonas();
+            this.pruebaSucursales = new PruebaSucursales();
+            db.TipoInmueble.Add(new TipoInmueble { Id = 1, Nombre = "prueba" });
         }
         public Respuesta<Inmueble> CrearInmueble()
         {
             var persona = pruebaPersonas.CrearPersona();
+            var sucursal = pruebaSucursales.CrearSucursal();
 
             ///Crear una nueva Inmueble
             var Inmueble = new Inmueble
             {
-                IdSucursal = 1,
+                IdSucursal = sucursal?.Datos?.Id ?? 0,
                 Superficie = 50,
                 Direccion = "calle 64 #54",
-                NroBanios= 1,
-                NroCocinas= 1,
-                NroHabitaciones= 3, 
-                TieneGas= true,
-                TieneParqueadero= true, 
-                Referencia= "3434343",
-                IdEstado= 1,
-                IdTipoInmueble= 1, 
-                IdPersona= persona?.Datos?.Id ?? 0,
+                NroBanios = 1,
+                NroCocinas = 1,
+                NroHabitaciones = 3,
+                TieneGas = true,
+                TieneParqueadero = true,
+                Referencia = "3434343",
+                IdEstado = 1,
+                IdTipoInmueble = 1,
+                IdPersona = persona?.Datos?.Id ?? 0,
 
             };
             var Resultado = datosInmueble.Insertar(Inmueble);
@@ -49,10 +60,10 @@ namespace test.Api
 
         public Respuesta<Inmueble> EliminarInmueble()
         {
-            var resultado = datosInmueble.Eliminar(created.Id,false);
+            var resultado = datosInmueble.Eliminar(created.Id, false);
             var persona = pruebaPersonas.EliminarPersona();
             return resultado;
-            
+
         }
         /// <summary>
         /// Validar que se crea y se elimine una Inmueble
@@ -79,10 +90,6 @@ namespace test.Api
             Assert.True(resultado3.Completa);
             var resultado4 = datosInmueble.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);
-
-
-
         }
-
     }
 }

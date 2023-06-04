@@ -1,6 +1,9 @@
 ﻿using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace test.Api
 {
@@ -13,7 +16,10 @@ namespace test.Api
 
         public PruebaOferta()
         {
-            this.datosOferta = new OfertaData(_dbConfig);
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            var db = new InmobiliariaContext(optionsBuilder.Options);
+            this.datosOferta = new OfertaData(db);
             this.pruebaInmuebles = new PruebaInmuebles();
         }
         public Respuesta<Oferta> CrearOferta()

@@ -1,6 +1,9 @@
 using Inmobiliaria.Data.SqlServer;
 using Inmobiliaria.Entities;
 using Inmobiliaria.Entities.Interfaces;
+using Inmobilliaria.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace test.Api
 {
@@ -10,8 +13,11 @@ namespace test.Api
 
         public static Persona? created;
 
-        public PruebaPersonas() { 
-           this.datosPersona = new PersonaData(_dbConfig);
+        public PruebaPersonas() {
+            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
+            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            var db = new InmobiliariaContext(optionsBuilder.Options);
+            this.datosPersona = new PersonaData(db);
         }
         public Respuesta<Persona> CrearPersona() {
            
@@ -68,10 +74,6 @@ namespace test.Api
             Assert.True(resultado3.Completa);
             var resultado4 = datosPersona.Obtener(resultado.Datos.Id);
             Assert.Null(resultado4);
-
-
-
         }
-
     }
 }

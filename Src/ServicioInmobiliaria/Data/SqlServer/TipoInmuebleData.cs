@@ -15,11 +15,9 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public TipoInmuebleData(DbConfig conn)
+        public TipoInmuebleData(InmobiliariaContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
-            optionsBuilder.UseSqlServer(conn.ConnectionString);
-            _context = new InmobiliariaContext(optionsBuilder.Options);
+            _context = context;
         }
 
         public Respuesta<TipoInmueble> Actualizar(TipoInmueble entidad)

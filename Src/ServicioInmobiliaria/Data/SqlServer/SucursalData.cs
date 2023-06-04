@@ -2,12 +2,7 @@
 using Inmobiliaria.Entities.Interfaces;
 using Inmobilliaria.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inmobiliaria.Data.SqlServer
 {
@@ -15,11 +10,9 @@ namespace Inmobiliaria.Data.SqlServer
     {
         private readonly InmobiliariaContext _context;
 
-        public SucursalData(DbConfig conn)
+        public SucursalData(InmobiliariaContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
-            optionsBuilder.UseSqlServer(conn.ConnectionString);
-            _context = new InmobiliariaContext(optionsBuilder.Options);
+            _context = context;
         }
 
         public Respuesta<Sucursal> Actualizar(Sucursal entidad)
@@ -66,7 +59,7 @@ namespace Inmobiliaria.Data.SqlServer
 
         public Sucursal? Obtener(int id)
         {
-            return _context?.Sucursal?.Include(x => x.Estado).FirstOrDefault(x=>x.Id == id);
+            return _context?.Sucursal?.Include(x => x.Estado).FirstOrDefault(x => x.Id == id);
         }
     }
 }
