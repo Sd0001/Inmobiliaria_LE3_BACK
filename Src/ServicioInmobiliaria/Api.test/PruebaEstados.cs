@@ -1,14 +1,16 @@
-using Inmobiliaria.Data.SqlServer;
-using Inmobiliaria.Entities;
-using Inmobiliaria.Entities.Interfaces;
-using Inmobilliaria.Data;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 
 namespace test.Api
-{
+{  
+    [Collection("Sequential")]
     public class PruebaEstados : TestBase
     {
+        private readonly string dbPruebas;
+
+        public PruebaEstados(string dbPruebas = "PruebaEstados")
+        {
+            this.dbPruebas = dbPruebas;
+        }
+
         /// <summary>
         /// Validar que hay 2 estados
         /// </summary>
@@ -16,7 +18,7 @@ namespace test.Api
         public void CantidadEstados()
         {
             var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
-            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            optionsBuilder.UseInMemoryDatabase(dbPruebas);
             var db = new InmobiliariaContext(optionsBuilder.Options);
             db.Estado.Add(new Estado { Id = 1, Nombre = "Activo" });
             db.Estado.Add(new Estado { Id = 2, Nombre = "Eliminado" });

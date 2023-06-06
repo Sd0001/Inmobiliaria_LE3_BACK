@@ -1,12 +1,6 @@
-﻿using Inmobiliaria.Data.SqlServer;
-using Inmobiliaria.Entities;
-using Inmobiliaria.Entities.Interfaces;
-using Inmobilliaria.Data;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-
-namespace test.Api
+﻿namespace test.Api
 {
+    [Collection("Sequential")]
     public class PruebaOferta : TestBase
     {
         IDatos<Oferta> datosOferta;
@@ -14,13 +8,13 @@ namespace test.Api
 
         public static Oferta? created;
 
-        public PruebaOferta()
+        public PruebaOferta(string dbPruebas= "PruebaOferta")
         {
             var optionsBuilder = new DbContextOptionsBuilder<InmobiliariaContext>();
-            optionsBuilder.UseInMemoryDatabase("Inmobiliaria");
+            optionsBuilder.UseInMemoryDatabase(dbPruebas);
             var db = new InmobiliariaContext(optionsBuilder.Options);
             this.datosOferta = new OfertaData(db);
-            this.pruebaInmuebles = new PruebaInmuebles();
+            this.pruebaInmuebles = new PruebaInmuebles(dbPruebas);
         }
         public Respuesta<Oferta> CrearOferta()
         {
