@@ -46,7 +46,7 @@
         /// Validar que se crea y se elimine una Sucursal
         /// </summary>
         [Fact]
-        public void PruebaIntegralSucursals()
+        public void PruebaIntegralSucursales()
         {
             var resultado = CrearSucursal();
             Assert.True(resultado.Completa);
